@@ -1,0 +1,6 @@
+{
+  "urls": ["images/letters/o.png"],
+  "sprites": [
+    {"id": "o", "url": 0, "x": 0, "y": 0, "w": 23, "h": 21}
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "urls": ["images/letters/l.png"],
+  "sprites": [
+    {"id": "l", "url": 0, "x": 0, "y": 0, "w": 16, "h": 25}
+  ]
+}
