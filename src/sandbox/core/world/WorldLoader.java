@@ -61,8 +61,9 @@ public class WorldLoader {
                         goblinzDungeonWorld.add(worldObject, x, y);
                     }
                     
-                    assetWatcher.start();
                 }
+                
+                assetWatcher.start();
 
             }
 
