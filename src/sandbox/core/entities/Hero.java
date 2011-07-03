@@ -9,15 +9,20 @@ import forplay.core.Image;
 import forplay.core.ResourceCallback;
 
 public class Hero extends WorldObject {
-    private static final float STEP = (float) 1;
+    private static final float STEP = (float) 0.1;
     public static String JSON_IMAGE = "sprites/hero.json";
     private Sprite sprite;
     
-    public float newX;
-    public float newY;
+    public boolean isMovingLeft;
+    public boolean isMovingRight;
+    public boolean isMovingUp;
+    public boolean isMovingDown;
+    
+    public float newX = 0;
+    public float newY = 6;
 
-    public float x;
-    public float y;
+    public float x = 0;
+    public float y = 6;
 
     public Hero(int x, int y) {
         this.x = x;
@@ -85,24 +90,34 @@ public class Hero extends WorldObject {
 
     public void moveLeft() {
         newX = x - STEP;
+        isMovingRight = false;
+        isMovingLeft = true;
         //x = x - STEP;
         // sprite.layer().setTranslation(x, y);
     }
 
     public void moveUp() {
         newY = y - STEP;
+        isMovingUp = true;
+        isMovingDown = false;
+        System.out.println(newY);
         //y = y - STEP;
         // sprite.layer().setTranslation(x, y);
     }
 
     public void moveRight() {
         newX = x + STEP;
+        isMovingRight = true;
+        isMovingLeft = false;
         //x = x + STEP;
         // sprite.layer().setTranslation(x, y);
     }
 
     public void moveDown() {
         newY = y + STEP;
+        isMovingUp = false;
+        isMovingDown = true;
+        System.out.println(newY);
 //        y = y + STEP;
         // sprite.layer().setTranslation(x, y);
     }
@@ -110,6 +125,22 @@ public class Hero extends WorldObject {
     @Override
     public Image getImage() {
         return sprite.layer().image();
+    }
+
+    public void upLeft() {
+        isMovingLeft = false;
+    }
+
+    public void upUp() {
+        isMovingUp = false;
+    }
+
+    public void upRight() {
+        isMovingRight = false;
+    }
+
+    public void upDown() {
+        isMovingDown = false;
     }
 
 }

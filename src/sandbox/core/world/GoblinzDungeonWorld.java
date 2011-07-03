@@ -149,7 +149,10 @@ public class GoblinzDungeonWorld {
     public boolean tellIsCollidableObject(float x, float y) {
         boolean result = false;
         
-        WorldObject sandboxObject = world[(int)y * worldWidth + (int)x];
+        int y2 = (int)y;
+        int x2 = (int)x;
+        //System.out.println(x2 + "," + y2);
+        WorldObject sandboxObject = world[y2 * worldWidth + x2];
         if (sandboxObject != null) {
             result = true;
         }

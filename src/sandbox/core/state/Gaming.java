@@ -41,48 +41,177 @@ public class Gaming extends GameState {
         checkCollisions(d);
     }
 
+    public boolean collideDown() {
+        
+        boolean collide = false;
+        Hero hero = Globals.getInstance().getHero();
+        GoblinzDungeonWorld world = Globals.getInstance().getWorld();
+
+        float newY = hero.newY;
+        float y = hero.y;
+
+        if (newY != y) {
+            collide = world.tellIsCollidableObject(hero.x, newY + 1);
+            
+            if (collide) {
+                return true;
+            }
+            
+            float absX = (int) hero.x;
+            
+            if (hero.x > absX) {
+                collide = world.tellIsCollidableObject(hero.x + 1, newY + 1);
+            }
+        }
+        
+        return collide;
+    }
+    
+    public boolean collideUp() {
+        
+        boolean collide = false;
+        Hero hero = Globals.getInstance().getHero();
+        GoblinzDungeonWorld world = Globals.getInstance().getWorld();
+        
+        float newY = hero.newY;
+        float y = hero.y;
+
+        if (newY != y) {
+            collide = world.tellIsCollidableObject(hero.x, newY);
+            
+            if (collide) {
+                return true;
+            }
+            
+            float absX = (int) hero.x;
+            
+            if (hero.x > absX) {
+                collide = world.tellIsCollidableObject(hero.x + 1, newY);
+            }
+        }
+        
+        return collide;
+        
+    }
+    
+    public boolean collideLeft() {
+        
+        boolean collide = false;
+        Hero hero = Globals.getInstance().getHero();
+        GoblinzDungeonWorld world = Globals.getInstance().getWorld();
+        
+        float newX = hero.newX;
+        float x = hero.x;
+
+        if (newX != x) {
+            collide = world.tellIsCollidableObject(newX, hero.y);
+            
+            if (collide) {
+                return true;
+            }
+            
+            float absY = (int) hero.y;
+            
+            if (hero.y > absY) {
+                collide = world.tellIsCollidableObject(newX, hero.y + 1);
+            }
+        }
+        
+        return collide;
+    }
+    
+    public boolean collideRight() {
+        
+        boolean collide = false;
+        Hero hero = Globals.getInstance().getHero();
+        GoblinzDungeonWorld world = Globals.getInstance().getWorld();
+        
+        float newX = hero.newX;
+        float x = hero.x;
+
+        if (newX != x) {
+            collide = world.tellIsCollidableObject(newX + 1, hero.y);
+            
+            if (collide) {
+                return true;
+            }
+            
+            float absY = (int) hero.y;
+            
+            if (hero.y > absY) {
+                collide = world.tellIsCollidableObject(newX + 1, hero.y + 1);
+            }
+        }
+        
+        return collide;
+        
+    }
+    
     private void checkCollisions(float d) {
         Hero hero = Globals.getInstance().getHero();
         GoblinzDungeonWorld world = Globals.getInstance().getWorld();
         boolean hasCollisionX = false;
         boolean hasCollisionY = false;
 
-        // Check world bounds
+        // MOVING LEFT OR RIGHT
         if (hero.newX != hero.x) {
+
+            // Check world bounds
             if ((hero.newX < 0) || (hero.newX >= world.worldWidth)) {
                 hero.newX = hero.x;
                 hasCollisionX = true;
-            } 
+            }
+            
+            if (hero.isMovingLeft) {
+                hasCollisionX = collideLeft();
+                if (hasCollisionX) {
+                    hero.isMovingLeft = false;
+                }
+                
+            } else if (hero.isMovingRight) {
+                hasCollisionX = collideRight();
+                if (hasCollisionX) {
+                    hero.isMovingRight = false;
+                }
+            }
+
         }
 
+        // MOVING UP OR DOWN
         if (hero.newY != hero.y) {
+
+            // Check world bounds
             if ((hero.newY < 0) || (hero.newY >= world.worldHeight)) {
                 hero.newY = hero.y;
                 hasCollisionY = true;
-            } 
+            }
+            
+            if (hero.isMovingDown) {
+                hasCollisionY = collideDown();
+                if (hasCollisionY) {
+                    hero.isMovingDown = false;
+                }
+            } else if (hero.isMovingUp) {
+                hasCollisionY = collideUp();
+                if (hasCollisionY) {
+                    hero.isMovingUp = false;
+                }
+            }
+            
+            
         }
 
-        // Check other objects
-        boolean isCollidableObject = world.tellIsCollidableObject(hero.newX, hero.y);
-        
-        if (isCollidableObject) {
-            hero.newX = hero.x;
-            hasCollisionX = true;
-        } 
-
-        isCollidableObject = world.tellIsCollidableObject(hero.x, hero.newY);
-        
-        if (isCollidableObject) {
-            hero.newY = hero.y;
-            hasCollisionY = true;
-        } 
-        
+        // Put back
         if (!hasCollisionX) {
             hero.x = hero.newX;
+        } else {
+            hero.newX = hero.x;
         }
-        
+
         if (!hasCollisionY) {
             hero.y = hero.newY;
+        } else {
+            hero.newY = hero.y;
         }
     }
 
@@ -114,6 +243,27 @@ public class Gaming extends GameState {
             break;
         case Keyboard.KEY_DOWN:
             Globals.getInstance().getHero().moveDown();
+            break;
+        }
+
+    }
+
+    @Override
+    public void onKeyUp(int keyCode) {
+        super.onKeyUp(keyCode);
+
+        switch (keyCode) {
+        case Keyboard.KEY_LEFT:
+            Globals.getInstance().getHero().upLeft();
+            break;
+        case Keyboard.KEY_UP:
+            Globals.getInstance().getHero().upUp();
+            break;
+        case Keyboard.KEY_RIGHT:
+            Globals.getInstance().getHero().upRight();
+            break;
+        case Keyboard.KEY_DOWN:
+            Globals.getInstance().getHero().upDown();
             break;
         }
 
