@@ -7,7 +7,7 @@ public class Intro extends GameState {
     // private Hero hero;
 
     public Intro() {
-        name = this.getClass().getSimpleName();
+        //name = this.getClass().getSimpleName();
     }
 
     @Override

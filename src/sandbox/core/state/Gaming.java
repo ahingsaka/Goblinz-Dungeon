@@ -12,7 +12,7 @@ import sandbox.core.world.WorldLoader;
 public class Gaming extends GameState {
 
     public Gaming() {
-        name = this.getClass().getSimpleName();
+        //name = this.getClass().getSimpleName();
     }
 
     @Override
