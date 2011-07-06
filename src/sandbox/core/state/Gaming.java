@@ -54,6 +54,7 @@ public class Gaming extends GameState {
             if (speed == 0) {
                 hero.isJumping = false;
                 hero.isFalling = true;
+                hero.isMovingDown = true;
                 hero.speed = Hero.JUMP;
                 return;
             }
@@ -66,18 +67,7 @@ public class Gaming extends GameState {
         }
 
         if (hero.isFalling) {
-            int speed = hero.speed;
-
-            if (speed == 0) {
-                hero.isFalling = false;
-                hero.speed = Hero.JUMP;
-                return;
-            }
-
-            hero.speed = --speed;
-
             hero.newY = hero.y + (float) 0.1;
-
             return;
         }
 
@@ -252,7 +242,9 @@ public class Gaming extends GameState {
         if (!hasCollisionY) {
             hero.y = hero.newY;
         } else {
+            System.out.println("collission");
             hero.newY = hero.y;
+            hero.isFalling = false;
         }
     }
 

@@ -165,7 +165,7 @@ public class Hero extends WorldObject {
      *  
      */
     public void jump() {
-        if (!isJumping) {
+        if (!isJumping && !isFalling) {
             isJumping = true;
             speed = JUMP;
             
