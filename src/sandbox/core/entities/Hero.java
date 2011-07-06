@@ -10,6 +10,7 @@ import forplay.core.ResourceCallback;
 
 public class Hero extends WorldObject {
     private static final float STEP = (float) 0.1;
+    public static final int JUMP = 20;
     public static String JSON_IMAGE = "sprites/hero.json";
     private Sprite sprite;
     
@@ -18,11 +19,16 @@ public class Hero extends WorldObject {
     public boolean isMovingUp;
     public boolean isMovingDown;
     
+    public boolean isJumping;
+    
+    public int speed;
+    
     public float newX = 0;
     public float newY = 6;
 
     public float x = 0;
     public float y = 6;
+    public boolean isFalling;
 
     public Hero(int x, int y) {
         this.x = x;
@@ -97,10 +103,10 @@ public class Hero extends WorldObject {
     }
 
     public void moveUp() {
-        newY = y - STEP;
-        isMovingUp = true;
-        isMovingDown = false;
-        System.out.println(newY);
+//        newY = y - STEP;
+//        isMovingUp = true;
+//        isMovingDown = false;
+//        System.out.println(newY);
         //y = y - STEP;
         // sprite.layer().setTranslation(x, y);
     }
@@ -114,10 +120,10 @@ public class Hero extends WorldObject {
     }
 
     public void moveDown() {
-        newY = y + STEP;
-        isMovingUp = false;
-        isMovingDown = true;
-        System.out.println(newY);
+//        newY = y + STEP;
+//        isMovingUp = false;
+//        isMovingDown = true;
+//        System.out.println(newY);
 //        y = y + STEP;
         // sprite.layer().setTranslation(x, y);
     }
@@ -159,7 +165,11 @@ public class Hero extends WorldObject {
      *  
      */
     public void jump() {
-        
+        if (!isJumping) {
+            isJumping = true;
+            speed = JUMP;
+            
+        }
     }
 
 }
