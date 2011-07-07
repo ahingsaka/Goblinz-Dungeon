@@ -44,6 +44,7 @@ public class Gaming extends GameState {
 
     /**
      * TODO should be in hero ?
+     * CLEAN this ASAP !!
      */
     private void calculateJump() {
         Hero hero = Globals.getInstance().getHero();
@@ -53,6 +54,16 @@ public class Gaming extends GameState {
 
             if (speed == 0) {
                 hero.isJumping = false;
+                
+                
+                if (hero.isJumpingRight) {
+                    hero.isFallingRight = true;
+                    hero.isJumpingRight = false;
+                } else if (hero.isJumpingLeft) {
+                    hero.isFallingLeft = true;
+                    hero.isJumpingLeft = false;
+                }
+
                 hero.isFalling = true;
                 hero.isMovingDown = true;
                 hero.speed = Hero.JUMP;
@@ -62,11 +73,24 @@ public class Gaming extends GameState {
             hero.speed = --speed;
 
             hero.newY = hero.y - (float) 0.1;
+            
+            if (hero.isJumpingRight) {
+                hero.newX = hero.x + (float) 0.1;
+            } else if (hero.isJumpingLeft) {
+                hero.newX = hero.x - (float) 0.1;
+            }
 
             return;
         }
 
         if (hero.isFalling) {
+            
+            if (hero.isFallingRight) {
+                hero.newX = hero.x + (float) 0.1;
+            } else if (hero.isFallingLeft) {
+                hero.newX = hero.x - (float) 0.1;
+            }
+            
             hero.newY = hero.y + (float) 0.1;
             return;
         }
@@ -245,6 +269,8 @@ public class Gaming extends GameState {
             System.out.println("collission");
             hero.newY = hero.y;
             hero.isFalling = false;
+            hero.isFallingLeft = false;
+            hero.isFallingRight = false;
         }
     }
 

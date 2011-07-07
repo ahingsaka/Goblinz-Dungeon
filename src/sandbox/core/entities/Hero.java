@@ -20,6 +20,8 @@ public class Hero extends WorldObject {
     public boolean isMovingDown;
     
     public boolean isJumping;
+    public boolean isJumpingRight;
+    public boolean isJumpingLeft;
     
     public int speed;
     
@@ -28,7 +30,11 @@ public class Hero extends WorldObject {
 
     public float x = 0;
     public float y = 6;
+    
     public boolean isFalling;
+    public boolean isFallingRight;
+    public boolean isFallingLeft;
+    
 
     public Hero(int x, int y) {
         this.x = x;
@@ -166,6 +172,13 @@ public class Hero extends WorldObject {
      */
     public void jump() {
         if (!isJumping && !isFalling) {
+            
+            if (isMovingRight) {
+                isJumpingRight = true;
+            } else if (isMovingLeft) {
+                isJumpingLeft = true;
+            }
+            
             isJumping = true;
             speed = JUMP;
             
