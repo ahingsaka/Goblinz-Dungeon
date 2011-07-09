@@ -40,6 +40,16 @@ public class Gaming extends GameState {
     protected void update(float d) {
         calculateJump();
         checkCollisions(d);
+        checkMovements();
+    }
+
+    private void checkMovements() {
+        Hero hero = Globals.getInstance().getHero();
+        if (hero.isMovingLeft) {
+            hero.moveLeft();
+        } else if (hero.isMovingRight) {
+            hero.moveRight();
+        }
     }
 
     /**

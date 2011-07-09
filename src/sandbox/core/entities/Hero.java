@@ -104,6 +104,7 @@ public class Hero extends WorldObject {
         newX = x - STEP;
         isMovingRight = false;
         isMovingLeft = true;
+        System.out.println("left");
         //x = x - STEP;
         // sprite.layer().setTranslation(x, y);
     }
