@@ -41,6 +41,11 @@ public class Gaming extends GameState {
         calculateJump();
         checkCollisions(d);
         checkMovements();
+        gravityCheck();
+    }
+
+    private void gravityCheck() {
+
     }
 
     private void checkMovements() {
@@ -53,8 +58,7 @@ public class Gaming extends GameState {
     }
 
     /**
-     * TODO should be in hero ?
-     * CLEAN this ASAP !!
+     * TODO should be in hero ? CLEAN this ASAP !!
      */
     private void calculateJump() {
         Hero hero = Globals.getInstance().getHero();
@@ -64,8 +68,7 @@ public class Gaming extends GameState {
 
             if (speed == 0) {
                 hero.isJumping = false;
-                
-                
+
                 if (hero.isJumpingRight) {
                     hero.isFallingRight = true;
                     hero.isJumpingRight = false;
@@ -83,7 +86,7 @@ public class Gaming extends GameState {
             hero.speed = --speed;
 
             hero.newY = hero.y - (float) 0.1;
-            
+
             if (hero.isJumpingRight) {
                 hero.newX = hero.x + (float) 0.1;
             } else if (hero.isJumpingLeft) {
@@ -93,16 +96,21 @@ public class Gaming extends GameState {
             return;
         }
 
-        if (hero.isFalling) {
-            
+        else if (hero.isFalling) {
+
             if (hero.isFallingRight) {
                 hero.newX = hero.x + (float) 0.1;
             } else if (hero.isFallingLeft) {
                 hero.newX = hero.x - (float) 0.1;
             }
-            
+
             hero.newY = hero.y + (float) 0.1;
             return;
+            
+        } else {
+            // Gravity
+            hero.isMovingDown = true;
+            hero.newY = hero.y + (float) 0.1;
         }
 
     }
@@ -276,7 +284,7 @@ public class Gaming extends GameState {
         if (!hasCollisionY) {
             hero.y = hero.newY;
         } else {
-            System.out.println("collision");
+            //System.out.println("collision");
             hero.newY = hero.y;
             hero.isFalling = false;
             hero.isFallingLeft = false;
@@ -305,7 +313,7 @@ public class Gaming extends GameState {
             Globals.getInstance().getHero().moveLeft();
             break;
         case Keyboard.KEY_UP:
-            //Globals.getInstance().getHero().moveUp();
+            // Globals.getInstance().getHero().moveUp();
             Globals.getInstance().getHero().jump();
             break;
         case Keyboard.KEY_RIGHT:
@@ -330,7 +338,7 @@ public class Gaming extends GameState {
             Globals.getInstance().getHero().upLeft();
             break;
         case Keyboard.KEY_UP:
-            //Globals.getInstance().getHero().upUp();
+            // Globals.getInstance().getHero().upUp();
             break;
         case Keyboard.KEY_RIGHT:
             Globals.getInstance().getHero().upRight();
