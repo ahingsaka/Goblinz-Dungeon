@@ -19,9 +19,8 @@ import forplay.core.Image;
 
 /**
  * Represents the data associated with a single sprite.
- * ahingsaka : change visibility of this class !!!
  */
-public class SpriteImage {
+class SpriteImage {
     private final Image image;
     private final int x;
     private final int y;
