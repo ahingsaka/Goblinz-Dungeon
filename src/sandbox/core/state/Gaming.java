@@ -276,7 +276,7 @@ public class Gaming extends GameState {
         if (!hasCollisionY) {
             hero.y = hero.newY;
         } else {
-            System.out.println("collission");
+            System.out.println("collision");
             hero.newY = hero.y;
             hero.isFalling = false;
             hero.isFallingLeft = false;
@@ -305,7 +305,8 @@ public class Gaming extends GameState {
             Globals.getInstance().getHero().moveLeft();
             break;
         case Keyboard.KEY_UP:
-            Globals.getInstance().getHero().moveUp();
+            //Globals.getInstance().getHero().moveUp();
+            Globals.getInstance().getHero().jump();
             break;
         case Keyboard.KEY_RIGHT:
             Globals.getInstance().getHero().moveRight();
@@ -314,7 +315,7 @@ public class Gaming extends GameState {
             Globals.getInstance().getHero().moveDown();
             break;
         case Keyboard.KEY_SPACE:
-            Globals.getInstance().getHero().jump();
+            Globals.getInstance().getHero().sword();
             break;
         }
 
@@ -329,7 +330,7 @@ public class Gaming extends GameState {
             Globals.getInstance().getHero().upLeft();
             break;
         case Keyboard.KEY_UP:
-            Globals.getInstance().getHero().upUp();
+            //Globals.getInstance().getHero().upUp();
             break;
         case Keyboard.KEY_RIGHT:
             Globals.getInstance().getHero().upRight();

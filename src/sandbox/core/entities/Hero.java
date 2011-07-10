@@ -23,6 +23,8 @@ public class Hero extends WorldObject {
     public boolean isJumpingRight;
     public boolean isJumpingLeft;
     
+    public boolean isSlicing;
+    
     public int speed;
     
     public float newX = 0;
@@ -104,7 +106,6 @@ public class Hero extends WorldObject {
         newX = x - STEP;
         isMovingRight = false;
         isMovingLeft = true;
-        System.out.println("left");
         //x = x - STEP;
         // sprite.layer().setTranslation(x, y);
     }
@@ -183,6 +184,12 @@ public class Hero extends WorldObject {
             isJumping = true;
             speed = JUMP;
             
+        }
+    }
+
+    public void sword() {
+        if (!isSlicing) {
+            isSlicing = true;
         }
     }
 

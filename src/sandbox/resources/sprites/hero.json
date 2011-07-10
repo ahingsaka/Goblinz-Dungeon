@@ -1,5 +1,5 @@
 {
-  "urls": ["images/hero_big.png"],
+  "urls": ["images/hero_big_v2.png"],
   "sprites": [
     {"id": "cloud", "url": 0, "x": 0, "y": 0, "w": 56, "h": 58}
   ]
