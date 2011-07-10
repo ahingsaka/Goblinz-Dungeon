@@ -47,7 +47,7 @@ public class Hero extends WorldObject {
         sprite.addCallback(new ResourceCallback<Sprite>() {
             @Override
             public void done(Sprite sprite) {
-                sprite.setSprite(0);
+                sprite.setSprite("hero_left");
             }
 
             @Override
@@ -57,10 +57,12 @@ public class Hero extends WorldObject {
         });
 
     }
-
-    public Hero(final GroupLayer characterLayer) {
-
+    
+    public Hero(final GroupLayer characterLayer, int x, int y) {
+        
         sprite = SpriteLoader.getSprite(JSON_IMAGE);
+        this.x = x;
+        this.y = y;
 
         sprite.addCallback(new ResourceCallback<Sprite>() {
             @Override
@@ -82,30 +84,14 @@ public class Hero extends WorldObject {
         sprite.layer().setTranslation(x, y);
     }
 
-    public Hero(final GroupLayer characterLayer, final float x, final float y) {
-        sprite = SpriteLoader.getSprite(JSON_IMAGE);
-        this.x = x;
-        this.y = y;
-
-        sprite.addCallback(new ResourceCallback<Sprite>() {
-            @Override
-            public void done(Sprite sprite) {
-                sprite.setSprite(0);
-                sprite.layer().setTranslation(x, y);
-                characterLayer.add(sprite.layer());
-            }
-
-            @Override
-            public void error(Throwable err) {
-                log().error("Error loading image!", err);
-            }
-        });
-    }
-
     public void moveLeft() {
         newX = x - STEP;
         isMovingRight = false;
         isMovingLeft = true;
+        
+        if (!isJumping) {
+            sprite.setSprite("hero_left");
+        }
         //x = x - STEP;
         // sprite.layer().setTranslation(x, y);
     }
@@ -123,6 +109,10 @@ public class Hero extends WorldObject {
         newX = x + STEP;
         isMovingRight = true;
         isMovingLeft = false;
+        
+        if (!isJumping) {
+            sprite.setSprite("hero_right");
+        }
         //x = x + STEP;
         // sprite.layer().setTranslation(x, y);
     }
@@ -138,6 +128,7 @@ public class Hero extends WorldObject {
 
     @Override
     public Image getImage() {
+        //return sprite.current().image();
         return sprite.layer().image();
     }
 

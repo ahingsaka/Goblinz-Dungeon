@@ -26,6 +26,7 @@ public class DisplayManager {
     private float viewOriginY;
 
     public DisplayManager() {
+        
         textLayer = graphics().createGroupLayer();
         characterLayer = graphics().createGroupLayer();
 
@@ -40,6 +41,10 @@ public class DisplayManager {
 
     public void setSize(int screenWidth, int screenHeight) {
         graphics().setSize(screenWidth, screenHeight);
+    }
+    
+    public GroupLayer getCharacterLayer() {
+        return characterLayer;
     }
 
     public GroupLayer getTextLayer() {

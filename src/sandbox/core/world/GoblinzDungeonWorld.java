@@ -125,7 +125,11 @@ public class GoblinzDungeonWorld {
         Hero hero = Globals.getInstance().getHero();
         int px = worldToPixelX(surf, hero.x);
         int py = worldToPixelY(surf, hero.y) - TILE_BASE;
-        surf.drawImage(hero.getImage(), px, py);
+        
+        //surf.drawImage(hero.getImage(), px, py);
+        hero.setPosition(px, py);
+        
+        
     }
 
     public void initWorldTab(int width, int height) {

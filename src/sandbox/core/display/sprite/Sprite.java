@@ -76,6 +76,16 @@ public class Sprite {
     public ImageLayer layer() {
         return layer;
     }
+    
+
+    /**
+     * Added since image() of layer returns SHITTY results !!!
+     * (ahingsaka)
+     * @return
+     */
+    public SpriteImage current() {
+        return current;
+    }
 
     /**
      * Return the number of sprites.

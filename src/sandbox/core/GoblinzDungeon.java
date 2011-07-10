@@ -12,7 +12,7 @@ import forplay.core.Image;
 /**
  * 
  * @author ahingsaka
- * @version 0.3.2
+ * @version 0.4.0
  */
 public class GoblinzDungeon implements Game {
 
@@ -36,7 +36,7 @@ public class GoblinzDungeon implements Game {
         Image image = assetManager().getImage(BACKGROUND);
         displayManager.createBackground(image);
 
-        Hero hero = new Hero(0, 6);
+        Hero hero = new Hero(displayManager.getCharacterLayer(), 0, 6);
         Globals.getInstance().setHero(hero);
 
         // Load the states

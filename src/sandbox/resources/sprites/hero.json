@@ -1,6 +1,7 @@
 {
   "urls": ["images/hero_big_v2.png"],
   "sprites": [
-    {"id": "cloud", "url": 0, "x": 0, "y": 0, "w": 56, "h": 58}
+    {"id": "hero_right", "url": 0, "x": 0, "y": 0, "w": 56, "h": 58},
+    {"id": "hero_left", "url": 0, "x": 56, "y": 0, "w": 56, "h": 58}
   ]
 }
