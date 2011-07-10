@@ -1,5 +1,6 @@
 package sandbox.core.world;
 
+import sandbox.core.entities.Door;
 import sandbox.core.entities.Rock;
 import forplay.core.AssetWatcher;
 import forplay.core.ForPlay;
@@ -19,6 +20,7 @@ public class WorldLoader {
             public void done(String resource) {
                 
                 Rock rock = new Rock();
+                Door door = new Door();
                 
                 AssetWatcher assetWatcher = new AssetWatcher(new AssetWatcher.Listener() {
 
@@ -53,8 +55,9 @@ public class WorldLoader {
                     
                     if (Rock.TYPE.equalsIgnoreCase(type)) {
                         worldObject = rock;
+                    } else if (Door.TYPE.equalsIgnoreCase(type)) {
+                        worldObject = door;
                     }
-                    
                     
                     if (entity != null) {
                         assetWatcher.add(worldObject.getImage());

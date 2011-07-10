@@ -184,4 +184,9 @@ public class Hero extends WorldObject {
         }
     }
 
+    @Override
+    public boolean isCollidable() {
+        return true;
+    }
+
 }

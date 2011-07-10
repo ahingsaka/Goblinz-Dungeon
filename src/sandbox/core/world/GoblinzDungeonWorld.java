@@ -157,7 +157,7 @@ public class GoblinzDungeonWorld {
         int x2 = (int)x;
         //System.out.println(x2 + "," + y2);
         WorldObject sandboxObject = world[y2 * worldWidth + x2];
-        if (sandboxObject != null) {
+        if (sandboxObject != null && sandboxObject.isCollidable()) {
             result = true;
         }
         

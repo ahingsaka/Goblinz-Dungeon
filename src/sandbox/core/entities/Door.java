@@ -7,16 +7,16 @@ import sandbox.core.world.WorldObject;
 import forplay.core.Image;
 import forplay.core.ResourceCallback;
 
-public class Rock extends WorldObject {
+public class Door extends WorldObject {
 
-    public static String TYPE = "rock";
-    public static String JSON_IMAGE = "sprites/rock.json";
+    public static String TYPE = "door";
+    public static String JSON_IMAGE = "sprites/door.json";
     private Sprite sprite;
     private Image image;
 
-    public Rock() {
+    public Door() {
+
         sprite = SpriteLoader.getSprite(JSON_IMAGE);
-        
 
         sprite.addCallback(new ResourceCallback<Sprite>() {
             @Override
@@ -30,6 +30,7 @@ public class Rock extends WorldObject {
                 log().error("Error loading image!", err);
             }
         });
+
     }
 
     @Override
@@ -39,7 +40,7 @@ public class Rock extends WorldObject {
 
     @Override
     public boolean isCollidable() {
-        return true;
+        return false;
     }
 
 }

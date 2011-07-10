@@ -6,4 +6,6 @@ public abstract class WorldObject {
     
     public abstract Image getImage();
 
+    public abstract boolean isCollidable();
+
 }
