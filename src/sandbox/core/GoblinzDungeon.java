@@ -12,7 +12,7 @@ import forplay.core.Image;
 /**
  * 
  * @author ahingsaka
- * @version 0.4.2
+ * @version 0.5.0
  */
 public class GoblinzDungeon implements Game {
 

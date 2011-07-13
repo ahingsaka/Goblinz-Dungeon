@@ -1,6 +1,0 @@
-{
-  "urls": ["images/letters/w.png"],
-  "sprites": [
-    {"id": "w", "url": 0, "x": 0, "y": 0, "w": 36, "h": 21}
-  ]
-}

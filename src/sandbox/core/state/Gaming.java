@@ -33,7 +33,7 @@ public class Gaming extends GameState {
                     }
                 });
 
-        displayManager.fontManager.addTextLayer("hello world", 10, 10);
+        displayManager.fontManager.addTextLayer("goblinz dungeon", 10, 10);
     }
 
     @Override
