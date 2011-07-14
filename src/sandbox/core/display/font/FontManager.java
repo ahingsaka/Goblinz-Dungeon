@@ -16,12 +16,12 @@ public class FontManager {
 
     private static final int SPACE_WIDTH_BETWEEN_CHARS = 5;
 
-    private GroupLayer textLayer;
+    private GroupLayer groupTextLayer;
     
     private Map<String, Image> imageDictionary;
     
     public FontManager(GroupLayer textLayer) {
-        this.textLayer = textLayer;
+        this.groupTextLayer = textLayer;
 
         // Load all letters
         imageDictionary = new HashMap<String, Image>();
@@ -78,7 +78,9 @@ public class FontManager {
         imageDictionary.put("z", zImage);
     }
 
-    public void addTextLayer(String label, int x, int y) {
+    public TextLayer createTextLayer(String label, int x, int y) {
+        
+        TextLayer textLayer = new TextLayer(label);
 
         String[] characters = label.split("");
         for (int i = 0; i < characters.length; i++) {
@@ -92,19 +94,23 @@ public class FontManager {
                     Image image = imageDictionary.get(character.toLowerCase());
                     ImageLayer imageLayer = graphics().createImageLayer(image);
                     imageLayer.setTranslation(x, y);
-
-                    textLayer.add(imageLayer);
+                    
+                    textLayer.addImageLayer(imageLayer);
+                    
+                    groupTextLayer.add(imageLayer);
 
                     x += image.width() + SPACE_WIDTH_BETWEEN_CHARS;
                 }
             }
 
         }
+        
+        return textLayer;
 
     }
 
     public void clear() {
-        textLayer.clear();
+        groupTextLayer.clear();
     }
 
 }

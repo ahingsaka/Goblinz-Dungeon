@@ -1,11 +1,15 @@
 package sandbox.core.state;
 
+import sandbox.core.display.font.TextLayer;
 import sandbox.core.fsm.GameState;
 import forplay.core.Keyboard;
 
 public class Intro extends GameState {
     
-    public static final String NAME = "intro"; 
+    public static final String NAME = "intro";
+    private TextLayer spaceInfo; 
+    
+    private boolean isDisappearing = true;
 
     public Intro() {
         name = NAME;
@@ -14,8 +18,9 @@ public class Intro extends GameState {
     @Override
     protected void display() {
         displayManager.clear();
-        displayManager.fontManager.addTextLayer("goblinz dungeon", 230, 170);
-        displayManager.fontManager.addTextLayer("press space to begin", 200, 220);
+        displayManager.fontManager.createTextLayer("goblinz dungeon", 230, 170);
+        
+        spaceInfo = displayManager.fontManager.createTextLayer("press space to begin", 200, 220);
     }
 
     @Override
@@ -30,8 +35,22 @@ public class Intro extends GameState {
 
     @Override
     protected void update(float d) {
-        // TODO Auto-generated method stub
-
+        if (isDisappearing) {
+            if (spaceInfo.alpha > 0) {
+                spaceInfo.alpha -= 0.1;
+                spaceInfo.refresh();
+            } else {
+                isDisappearing = false;
+            }
+            
+        } else {
+            if (spaceInfo.alpha <= 1) {
+                spaceInfo.alpha += 0.1;
+                spaceInfo.refresh();
+            } else {
+                isDisappearing = true;
+            }
+        }
     }
 
     @Override
