@@ -3,27 +3,27 @@ package sandbox.core.fsm;
 import static forplay.core.ForPlay.keyboard;
 import static forplay.core.ForPlay.pointer;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import sandbox.core.display.DisplayManager;
 
 public class GameStateManager {
 
-    List<GameState> states;
+    Map<String, GameState> states;
 
     GameState currentState;
 
     private DisplayManager displayManager;
 
     public GameStateManager() {
-        states = new ArrayList<GameState>();
+        states = new HashMap<String, GameState>();
     }
 
     public void addState(GameState gameState) {
-        gameState.setEndState(gameState);
+        gameState.setEndState(gameState.name);
         gameState.displayManager = displayManager;
-        states.add(gameState);
+        states.put(gameState.name, gameState);
     }
 
     public void addFirstState(GameState gameState) {
@@ -39,17 +39,18 @@ public class GameStateManager {
 
         // Activate and display the current state
         currentState.update(delta);
-        currentState.activate();
 
         // Check if state is ending
         // If it is the case, deactivate the current one and go to next
-        GameState nextState = currentState.getEndState();
+        GameState nextState = states.get(currentState.getEndState());
 
         if (!currentState.equals(nextState)) {
             currentState.deactivate();
             currentState = nextState;
             pointer().setListener(currentState);
             keyboard().setListener(currentState);
+            
+            currentState.activate();
             currentState.display();
         }
 

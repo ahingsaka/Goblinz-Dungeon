@@ -1,35 +1,49 @@
 package sandbox.core.state;
 
 import sandbox.core.fsm.GameState;
+import forplay.core.Keyboard;
 
 public class Intro extends GameState {
-
-    // private Hero hero;
+    
+    public static final String NAME = "intro"; 
 
     public Intro() {
-        //name = this.getClass().getSimpleName();
+        name = NAME;
     }
 
     @Override
     protected void display() {
-
+        displayManager.clear();
+        displayManager.fontManager.addTextLayer("goblinz dungeon", 230, 170);
+        displayManager.fontManager.addTextLayer("press space to begin", 200, 220);
     }
 
     @Override
     protected void activate() {
-        // TODO Auto-generated method stub
-
+        endState = NAME;
     }
 
     @Override
     protected void deactivate() {
-        // TODO Auto-generated method stub
-
+        displayManager.fontManager.clear();
     }
 
     @Override
     protected void update(float d) {
         // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onKeyDown(int keyCode) {
+        super.onKeyDown(keyCode);
+
+        switch (keyCode) {
+
+        case Keyboard.KEY_SPACE:
+            endState = Gaming.NAME;
+            break;
+        }
 
     }
 

@@ -11,29 +11,38 @@ import sandbox.core.world.WorldLoader;
 
 public class Gaming extends GameState {
 
+    public static final String NAME = "gaming";
+
+    public boolean hasLoaded = false;
+
     public Gaming() {
-        // name = this.getClass().getSimpleName();
+        name = NAME;
     }
 
     @Override
     protected void display() {
+        
+        Globals.getInstance().getHero().setPosition(0, 6);
 
-        WorldLoader.loadLevel("levels/level1.json", Globals.getInstance().getWorld(),
-                new ResourceCallback<GoblinzDungeonWorld>() {
+        if (!hasLoaded) {
+            WorldLoader.loadLevel("levels/level1.json", Globals.getInstance().getWorld(),
+                    new ResourceCallback<GoblinzDungeonWorld>() {
 
-                    @Override
-                    public void error(Throwable err) {
-                        ForPlay.log().error("Error loading world: " + err.getMessage());
-                    }
+                        @Override
+                        public void error(Throwable err) {
+                            ForPlay.log().error("Error loading world: " + err.getMessage());
+                        }
 
-                    @Override
-                    public void done(GoblinzDungeonWorld resource) {
-                        // System.out.println("loaded");
-                        resource.setIsLoaded(true);
-                    }
-                });
+                        @Override
+                        public void done(GoblinzDungeonWorld resource) {
+                            // System.out.println("loaded");
+                            resource.setIsLoaded(true);
+                            hasLoaded = true;
+                        }
+                    });
+        }
 
-        displayManager.fontManager.addTextLayer("goblinz dungeon", 10, 10);
+        // displayManager.fontManager.addTextLayer("goblinz dungeon", 10, 10);
     }
 
     @Override
@@ -106,7 +115,7 @@ public class Gaming extends GameState {
 
             hero.newY = hero.y + (float) 0.1;
             return;
-            
+
         } else {
             // Gravity
             hero.isMovingDown = true;
@@ -284,7 +293,7 @@ public class Gaming extends GameState {
         if (!hasCollisionY) {
             hero.y = hero.newY;
         } else {
-            //System.out.println("collision");
+            // System.out.println("collision");
             hero.newY = hero.y;
             hero.isFalling = false;
             hero.isFallingLeft = false;
@@ -294,14 +303,13 @@ public class Gaming extends GameState {
 
     @Override
     protected void activate() {
-        // TODO Auto-generated method stub
-
+        endState = NAME;
+        displayManager.show();
     }
 
     @Override
     protected void deactivate() {
-        // TODO Auto-generated method stub
-
+        displayManager.clear();
     }
 
     @Override
@@ -324,6 +332,9 @@ public class Gaming extends GameState {
             break;
         case Keyboard.KEY_SPACE:
             Globals.getInstance().getHero().sword();
+            break;
+        case Keyboard.KEY_ESC:
+            endState = Intro.NAME;
             break;
         }
 

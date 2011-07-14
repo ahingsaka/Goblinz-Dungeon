@@ -8,7 +8,7 @@ public abstract class GameState implements Keyboard.Listener, Pointer.Listener {
 
     protected String name;
 
-    protected GameState endState;
+    protected String endState;
 
     // TODO should be a Display obj
     protected DisplayManager displayManager;
@@ -21,11 +21,11 @@ public abstract class GameState implements Keyboard.Listener, Pointer.Listener {
 
     protected abstract void deactivate();
 
-    protected GameState getEndState() {
+    protected String getEndState() {
         return endState;
     }
 
-    public void setEndState(GameState endState) {
+    public void setEndState(String endState) {
         this.endState = endState;
     }
 

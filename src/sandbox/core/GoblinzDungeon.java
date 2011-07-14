@@ -5,6 +5,7 @@ import sandbox.core.display.DisplayManager;
 import sandbox.core.entities.Hero;
 import sandbox.core.fsm.GameStateManager;
 import sandbox.core.state.Gaming;
+import sandbox.core.state.Intro;
 import sandbox.core.world.GoblinzDungeonWorld;
 import forplay.core.Game;
 import forplay.core.Image;
@@ -44,7 +45,8 @@ public class GoblinzDungeon implements Game {
 
         // TODO put a display for each state ?
         gameStateManager.setDisplayManager(displayManager);
-        gameStateManager.addFirstState(new Gaming());
+        gameStateManager.addFirstState(new Intro());
+        gameStateManager.addState(new Gaming());
 
         // Start
         gameStateManager.init();

@@ -75,4 +75,15 @@ public class DisplayManager {
         }
     }
 
+    public void clear() {
+        textLayer.clear();
+        characterLayer.setVisible(false);
+        gameLayer.setVisible(false);
+    }
+    
+    public void show() {
+        gameLayer.setVisible(true);
+        characterLayer.setVisible(true);
+    }
+    
 }

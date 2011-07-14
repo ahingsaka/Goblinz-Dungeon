@@ -103,4 +103,8 @@ public class FontManager {
 
     }
 
+    public void clear() {
+        textLayer.clear();
+    }
+
 }
