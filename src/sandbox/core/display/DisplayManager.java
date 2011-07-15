@@ -23,8 +23,6 @@ public class DisplayManager {
 
     public FontManager fontManager;
     private GoblinzDungeonWorld world;
-    private float viewOriginX;
-    private float viewOriginY;
 
     public DisplayManager() {
         

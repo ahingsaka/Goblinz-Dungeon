@@ -25,8 +25,6 @@ public class Gaming extends GameState {
     @Override
     protected void display() {
 
-        Globals.getInstance().getHero().setPosition(0, 6);
-
         if (!hasLoaded) {
             WorldLoader.loadLevel("levels/level1.json", Globals.getInstance().getWorld(),
                     new ResourceCallback<GoblinzDungeonWorld>() {
@@ -65,10 +63,11 @@ public class Gaming extends GameState {
         float alpha = displayManager.alpha;
         
         if (alpha > 0) {
-            alpha--;
+            alpha -= 0.1;
             displayManager.setAlpha(alpha);
         } else {
-            setEndState(Intro.NAME);
+            isExitingLevel = false;
+            setEndState(End.NAME);
         }
     }
 
@@ -362,6 +361,12 @@ public class Gaming extends GameState {
 
     @Override
     protected void activate() {
+        
+        Hero hero = Globals.getInstance().getHero();
+        hero.newX = 0;
+        hero.newY = 6;
+        hero.setPosition(0, 6);
+        
         endState = NAME;
         displayManager.show();
     }
@@ -380,7 +385,6 @@ public class Gaming extends GameState {
             Globals.getInstance().getHero().moveLeft();
             break;
         case Keyboard.KEY_UP:
-            // Globals.getInstance().getHero().moveUp();
             Globals.getInstance().getHero().jump();
             break;
         case Keyboard.KEY_RIGHT:
@@ -406,9 +410,6 @@ public class Gaming extends GameState {
         switch (keyCode) {
         case Keyboard.KEY_LEFT:
             Globals.getInstance().getHero().upLeft();
-            break;
-        case Keyboard.KEY_UP:
-            // Globals.getInstance().getHero().upUp();
             break;
         case Keyboard.KEY_RIGHT:
             Globals.getInstance().getHero().upRight();

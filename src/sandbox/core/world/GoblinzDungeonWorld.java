@@ -4,13 +4,9 @@ import sandbox.core.Globals;
 import sandbox.core.entities.Door;
 import sandbox.core.entities.Hero;
 import sandbox.core.entities.InvisibleRock;
-import sandbox.core.entities.Rock;
 import forplay.core.Surface;
 
 public class GoblinzDungeonWorld {
-
-    // private static final int worldHeight = 20;
-    // private static final int worldWidth = 20;
 
     public int worldWidth;
     public int worldHeight;
@@ -31,26 +27,6 @@ public class GoblinzDungeonWorld {
     public void setViewOrigin(float x, float y) {
         viewOriginX = x;
         viewOriginY = y;
-    }
-
-    public GoblinzDungeonWorld() {
-        // world = new WorldObject[worldWidth * worldHeight];
-        // loadWorld();
-    }
-
-    /**
-     * TODO Should be loaded with json file ?
-     */
-    private void loadWorld() {
-
-        int i = 0;
-        for (int ty = 0; ty < worldHeight; ++ty) {
-            for (int tx = 0; tx < worldWidth; ++tx) {
-                this.world[i] = new Rock();
-                ++i;
-            }
-        }
-
     }
 
     private int worldToPixelX(Surface surf, double x) {

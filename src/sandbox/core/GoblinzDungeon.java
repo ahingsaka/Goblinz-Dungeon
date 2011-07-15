@@ -4,6 +4,7 @@ import static forplay.core.ForPlay.assetManager;
 import sandbox.core.display.DisplayManager;
 import sandbox.core.entities.Hero;
 import sandbox.core.fsm.GameStateManager;
+import sandbox.core.state.End;
 import sandbox.core.state.Gaming;
 import sandbox.core.state.Intro;
 import sandbox.core.world.GoblinzDungeonWorld;
@@ -13,7 +14,7 @@ import forplay.core.Image;
 /**
  * 
  * @author ahingsaka
- * @version 0.7.0
+ * @version 0.7.5
  */
 public class GoblinzDungeon implements Game {
 
@@ -47,6 +48,7 @@ public class GoblinzDungeon implements Game {
         gameStateManager.setDisplayManager(displayManager);
         gameStateManager.addFirstState(new Intro());
         gameStateManager.addState(new Gaming());
+        gameStateManager.addState(new End());
 
         // Start
         gameStateManager.init();

@@ -150,21 +150,6 @@ public class Hero extends WorldObject {
         isMovingDown = false;
     }
     
-    /**
-     *  v = vitesse
-     *  a = acceleration
-     *  g = gravite (10)
-     *  
-     *  t = temps
-     *  
-     *  chute= 1/2 * (g*t^2)
-     *  
-     *  
-     *  donc saut : 
-     *  1ere partie
-     *  y = -1/2 * (g*t^2) + vitesse de depart * t
-     *  
-     */
     public void jump() {
         if (!isJumping && !isFalling) {
             
