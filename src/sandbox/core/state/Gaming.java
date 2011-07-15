@@ -6,6 +6,7 @@ import forplay.core.ResourceCallback;
 import sandbox.core.Globals;
 import sandbox.core.entities.Hero;
 import sandbox.core.fsm.GameState;
+import sandbox.core.world.Collision;
 import sandbox.core.world.GoblinzDungeonWorld;
 import sandbox.core.world.WorldLoader;
 
@@ -15,13 +16,15 @@ public class Gaming extends GameState {
 
     public boolean hasLoaded = false;
 
+    private boolean isExitingLevel = false;
+
     public Gaming() {
         name = NAME;
     }
 
     @Override
     protected void display() {
-        
+
         Globals.getInstance().getHero().setPosition(0, 6);
 
         if (!hasLoaded) {
@@ -47,10 +50,26 @@ public class Gaming extends GameState {
 
     @Override
     protected void update(float d) {
-        calculateJump();
-        checkCollisions(d);
-        checkMovements();
-        gravityCheck();
+        if (isExitingLevel) {
+            makeScreenDisappear();
+            
+        } else {
+            calculateJump();
+            checkCollisions(d);
+            checkMovements();
+            gravityCheck();
+        }
+    }
+
+    private void makeScreenDisappear() {
+        float alpha = displayManager.alpha;
+        
+        if (alpha > 0) {
+            alpha--;
+            displayManager.setAlpha(alpha);
+        } else {
+            setEndState(Intro.NAME);
+        }
     }
 
     private void gravityCheck() {
@@ -126,7 +145,7 @@ public class Gaming extends GameState {
 
     public boolean collideDown() {
 
-        boolean collide = false;
+        Collision collide = Collision.NONE;
         Hero hero = Globals.getInstance().getHero();
         GoblinzDungeonWorld world = Globals.getInstance().getWorld();
 
@@ -136,7 +155,7 @@ public class Gaming extends GameState {
         if (newY != y) {
             collide = world.tellIsCollidableObject(hero.x, newY + 1);
 
-            if (collide) {
+            if (collide == Collision.BLOCK) {
                 return true;
             }
 
@@ -147,12 +166,22 @@ public class Gaming extends GameState {
             }
         }
 
-        return collide;
+        if (collide == Collision.NONE)
+            return false;
+        else if (collide == Collision.BLOCK)
+            return true;
+        else if (collide == Collision.HOLE) {
+            return true;
+        } else if (collide == Collision.END) {
+            isExitingLevel = true;
+            return false;
+        } else
+            return false;
     }
 
     public boolean collideUp() {
 
-        boolean collide = false;
+        Collision collide = Collision.NONE;
         Hero hero = Globals.getInstance().getHero();
         GoblinzDungeonWorld world = Globals.getInstance().getWorld();
 
@@ -162,7 +191,7 @@ public class Gaming extends GameState {
         if (newY != y) {
             collide = world.tellIsCollidableObject(hero.x, newY);
 
-            if (collide) {
+            if (collide == Collision.BLOCK) {
                 return true;
             }
 
@@ -173,13 +202,23 @@ public class Gaming extends GameState {
             }
         }
 
-        return collide;
+        if (collide == Collision.NONE)
+            return false;
+        else if (collide == Collision.BLOCK)
+            return true;
+        else if (collide == Collision.HOLE) {
+            return true;
+        } else if (collide == Collision.END) {
+            isExitingLevel = true;
+            return false;
+        } else
+            return false;
 
     }
 
     public boolean collideLeft() {
 
-        boolean collide = false;
+        Collision collide = Collision.NONE;
         Hero hero = Globals.getInstance().getHero();
         GoblinzDungeonWorld world = Globals.getInstance().getWorld();
 
@@ -189,7 +228,7 @@ public class Gaming extends GameState {
         if (newX != x) {
             collide = world.tellIsCollidableObject(newX, hero.y);
 
-            if (collide) {
+            if (collide == Collision.BLOCK) {
                 return true;
             }
 
@@ -200,12 +239,22 @@ public class Gaming extends GameState {
             }
         }
 
-        return collide;
+        if (collide == Collision.NONE)
+            return false;
+        else if (collide == Collision.BLOCK)
+            return true;
+        else if (collide == Collision.HOLE) {
+            return true;
+        } else if (collide == Collision.END) {
+            isExitingLevel = true;
+            return false;
+        } else
+            return false;
     }
 
     public boolean collideRight() {
 
-        boolean collide = false;
+        Collision collide = Collision.NONE;
         Hero hero = Globals.getInstance().getHero();
         GoblinzDungeonWorld world = Globals.getInstance().getWorld();
 
@@ -215,7 +264,7 @@ public class Gaming extends GameState {
         if (newX != x) {
             collide = world.tellIsCollidableObject(newX + 1, hero.y);
 
-            if (collide) {
+            if (collide == Collision.BLOCK) {
                 return true;
             }
 
@@ -226,7 +275,17 @@ public class Gaming extends GameState {
             }
         }
 
-        return collide;
+        if (collide == Collision.NONE)
+            return false;
+        else if (collide == Collision.BLOCK)
+            return true;
+        else if (collide == Collision.HOLE) {
+            return true;
+        } else if (collide == Collision.END) {
+            isExitingLevel = true;
+            return false;
+        } else
+            return false;
 
     }
 

@@ -1,6 +1,6 @@
 {
 	"id": "level1",
-	"width": 210,
+	"width": 212,
 	"height": 8,
 	"Entities" : [
 		{"type": "rock", "x": 0, "y": 7},
@@ -714,7 +714,13 @@
 		{"type": "rock", "x": 208, "y": 3},
 		{"type": "rock", "x": 209, "y": 3},
 		
-		{"type": "door", "x": 209, "y": 2},
-		{"type": "door", "x": 209, "y": 1}
+		{"type": "door", "x": 210, "y": 2},
+		{"type": "door", "x": 210, "y": 1},
+		{"type": "invisiblerock", "x": 210, "y": 3},
+		
+		{"type": "invisiblerock", "x": 211, "y": 3},
+		{"type": "invisiblerock", "x": 211, "y": 2},
+		{"type": "invisiblerock", "x": 211, "y": 1}
+		
 	]
 }

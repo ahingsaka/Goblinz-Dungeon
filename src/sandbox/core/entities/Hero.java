@@ -9,6 +9,8 @@ import forplay.core.Image;
 import forplay.core.ResourceCallback;
 
 public class Hero extends WorldObject {
+    
+    public static String TYPE = "hero";
     private static final float STEP = (float) 0.1;
     public static final int JUMP = 20;
     public static String JSON_IMAGE = "sprites/hero.json";
@@ -187,6 +189,11 @@ public class Hero extends WorldObject {
     @Override
     public boolean isCollidable() {
         return true;
+    }
+
+    @Override
+    public String getType() {
+        return TYPE;
     }
 
 }

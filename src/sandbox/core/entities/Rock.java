@@ -42,4 +42,9 @@ public class Rock extends WorldObject {
         return true;
     }
 
+    @Override
+    public String getType() {
+        return TYPE;
+    }
+
 }

@@ -1,6 +1,7 @@
 package sandbox.core.world;
 
 import sandbox.core.entities.Door;
+import sandbox.core.entities.InvisibleRock;
 import sandbox.core.entities.Rock;
 import forplay.core.AssetWatcher;
 import forplay.core.ForPlay;
@@ -21,6 +22,7 @@ public class WorldLoader {
                 
                 Rock rock = new Rock();
                 Door door = new Door();
+                InvisibleRock invisibleRock = new InvisibleRock();
                 
                 AssetWatcher assetWatcher = new AssetWatcher(new AssetWatcher.Listener() {
 
@@ -57,6 +59,8 @@ public class WorldLoader {
                         worldObject = rock;
                     } else if (Door.TYPE.equalsIgnoreCase(type)) {
                         worldObject = door;
+                    } else if (InvisibleRock.TYPE.equalsIgnoreCase(type)) {
+                        worldObject = invisibleRock;
                     }
                     
                     if (entity != null) {

@@ -14,6 +14,7 @@ import forplay.core.SurfaceLayer;
 
 public class DisplayManager {
 
+    public float alpha = 1;
     private ImageLayer backgroundLayer;
     private GroupLayer textLayer;
     public GroupLayer characterLayer;
@@ -79,11 +80,20 @@ public class DisplayManager {
         textLayer.clear();
         characterLayer.setVisible(false);
         gameLayer.setVisible(false);
+        setAlpha(1);
     }
     
     public void show() {
         gameLayer.setVisible(true);
         characterLayer.setVisible(true);
+        setAlpha(1);
+    }
+    
+    public void setAlpha(float alpha) {
+        this.alpha = alpha;
+        textLayer.setAlpha(alpha);
+        characterLayer.setAlpha(alpha);
+        gameLayer.setAlpha(alpha);
     }
     
 }

@@ -1,14 +1,16 @@
 package sandbox.core.world;
 
 import sandbox.core.Globals;
+import sandbox.core.entities.Door;
 import sandbox.core.entities.Hero;
+import sandbox.core.entities.InvisibleRock;
 import sandbox.core.entities.Rock;
 import forplay.core.Surface;
 
 public class GoblinzDungeonWorld {
 
-//    private static final int worldHeight = 20;
-//    private static final int worldWidth = 20;
+    // private static final int worldHeight = 20;
+    // private static final int worldWidth = 20;
 
     public int worldWidth;
     public int worldHeight;
@@ -125,11 +127,10 @@ public class GoblinzDungeonWorld {
         Hero hero = Globals.getInstance().getHero();
         int px = worldToPixelX(surf, hero.x);
         int py = worldToPixelY(surf, hero.y) - TILE_BASE;
-        
-        //surf.drawImage(hero.getImage(), px, py);
+
+        // surf.drawImage(hero.getImage(), px, py);
         hero.setPosition(px, py);
-        
-        
+
     }
 
     public void initWorldTab(int width, int height) {
@@ -149,19 +150,26 @@ public class GoblinzDungeonWorld {
     public void setIsLoaded(boolean isLoaded) {
         this.isLoaded = isLoaded;
     }
-    
-    public boolean tellIsCollidableObject(float x, float y) {
-        boolean result = false;
-        
-        int y2 = (int)y;
-        int x2 = (int)x;
-        //System.out.println(x2 + "," + y2);
-        WorldObject sandboxObject = world[y2 * worldWidth + x2];
-        if (sandboxObject != null && sandboxObject.isCollidable()) {
-            result = true;
+
+    public Collision tellIsCollidableObject(float x, float y) {
+        Collision result = Collision.NONE;
+
+        int y2 = (int) y;
+        int x2 = (int) x;
+        // System.out.println(x2 + "," + y2);
+
+        WorldObject worldObject = world[y2 * worldWidth + x2];
+
+        if (worldObject != null) {
+            if (worldObject.isCollidable()) {
+                result = Collision.BLOCK;
+            } else if (Door.TYPE.equals(worldObject.getType())) {
+                result = Collision.END;
+            } else if (InvisibleRock.TYPE.equals(worldObject.getType())) {
+                result = Collision.HOLE;
+            }
         }
-        
+
         return result;
     }
-
 }

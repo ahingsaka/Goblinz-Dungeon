@@ -1,20 +1,20 @@
 package sandbox.core.entities;
 
 import static forplay.core.ForPlay.log;
+import forplay.core.Image;
+import forplay.core.ResourceCallback;
 import sandbox.core.display.sprite.Sprite;
 import sandbox.core.display.sprite.SpriteLoader;
 import sandbox.core.world.WorldObject;
-import forplay.core.Image;
-import forplay.core.ResourceCallback;
 
-public class Door extends WorldObject {
+public class InvisibleRock extends WorldObject {
 
-    public static String TYPE = "door";
+    public static String TYPE = "invisiblerock";
     public static String JSON_IMAGE = "sprites/door.json";
     private Sprite sprite;
     private Image image;
 
-    public Door() {
+    public InvisibleRock() {
 
         sprite = SpriteLoader.getSprite(JSON_IMAGE);
 
@@ -40,7 +40,7 @@ public class Door extends WorldObject {
 
     @Override
     public boolean isCollidable() {
-        return false;
+        return true;
     }
 
     @Override
