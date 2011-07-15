@@ -134,16 +134,23 @@ public class GoblinzDungeonWorld {
         int x2 = (int) x;
         // System.out.println(x2 + "," + y2);
 
-        WorldObject worldObject = world[y2 * worldWidth + x2];
+        try {
+            WorldObject worldObject = world[y2 * worldWidth + x2];
 
-        if (worldObject != null) {
-            if (worldObject.isCollidable()) {
-                result = Collision.BLOCK;
-            } else if (Door.TYPE.equals(worldObject.getType())) {
-                result = Collision.END;
-            } else if (InvisibleRock.TYPE.equals(worldObject.getType())) {
-                result = Collision.HOLE;
+            if (worldObject != null) {
+                if (worldObject.isCollidable()) {
+                    result = Collision.BLOCK;
+                } else if (Door.TYPE.equals(worldObject.getType())) {
+                    result = Collision.END;
+                } else if (InvisibleRock.TYPE.equals(worldObject.getType())) {
+                    result = Collision.HOLE;
+                }
             }
+
+            
+        } catch (ArrayIndexOutOfBoundsException e) {
+            // FIXME this is ugly
+            return Collision.HOLE;
         }
 
         return result;

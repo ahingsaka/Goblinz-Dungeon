@@ -170,12 +170,17 @@ public class Gaming extends GameState {
         else if (collide == Collision.BLOCK)
             return true;
         else if (collide == Collision.HOLE) {
+            gameOver();
             return true;
         } else if (collide == Collision.END) {
             isExitingLevel = true;
             return false;
         } else
             return false;
+    }
+
+    private void gameOver() {
+        setEndState(GameOver.NAME);
     }
 
     public boolean collideUp() {
@@ -206,6 +211,7 @@ public class Gaming extends GameState {
         else if (collide == Collision.BLOCK)
             return true;
         else if (collide == Collision.HOLE) {
+            gameOver();
             return true;
         } else if (collide == Collision.END) {
             isExitingLevel = true;
@@ -243,6 +249,7 @@ public class Gaming extends GameState {
         else if (collide == Collision.BLOCK)
             return true;
         else if (collide == Collision.HOLE) {
+            gameOver();
             return true;
         } else if (collide == Collision.END) {
             isExitingLevel = true;
@@ -279,6 +286,7 @@ public class Gaming extends GameState {
         else if (collide == Collision.BLOCK)
             return true;
         else if (collide == Collision.HOLE) {
+            gameOver();
             return true;
         } else if (collide == Collision.END) {
             isExitingLevel = true;
@@ -363,9 +371,9 @@ public class Gaming extends GameState {
     protected void activate() {
         
         Hero hero = Globals.getInstance().getHero();
-        hero.newX = 0;
-        hero.newY = 6;
-        hero.setPosition(0, 6);
+        hero.newX = 209;
+        hero.newY = 2;
+        hero.setPosition(209, 2);
         
         endState = NAME;
         displayManager.show();
@@ -373,7 +381,7 @@ public class Gaming extends GameState {
 
     @Override
     protected void deactivate() {
-        displayManager.clear();
+        //displayManager.clear();
     }
 
     @Override

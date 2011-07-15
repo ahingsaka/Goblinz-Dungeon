@@ -5,6 +5,7 @@ import sandbox.core.display.DisplayManager;
 import sandbox.core.entities.Hero;
 import sandbox.core.fsm.GameStateManager;
 import sandbox.core.state.End;
+import sandbox.core.state.GameOver;
 import sandbox.core.state.Gaming;
 import sandbox.core.state.Intro;
 import sandbox.core.world.GoblinzDungeonWorld;
@@ -14,7 +15,7 @@ import forplay.core.Image;
 /**
  * 
  * @author ahingsaka
- * @version 0.7.5
+ * @version 0.7.9
  */
 public class GoblinzDungeon implements Game {
 
@@ -38,7 +39,7 @@ public class GoblinzDungeon implements Game {
         Image image = assetManager().getImage(BACKGROUND);
         displayManager.createBackground(image);
 
-        Hero hero = new Hero(displayManager.getCharacterLayer(), 0, 6);
+        Hero hero = new Hero(displayManager.getCharacterLayer(), 209, 2);
         Globals.getInstance().setHero(hero);
 
         // Load the states
@@ -49,6 +50,7 @@ public class GoblinzDungeon implements Game {
         gameStateManager.addFirstState(new Intro());
         gameStateManager.addState(new Gaming());
         gameStateManager.addState(new End());
+        gameStateManager.addState(new GameOver());
 
         // Start
         gameStateManager.init();
