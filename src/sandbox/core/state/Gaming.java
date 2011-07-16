@@ -373,6 +373,8 @@ public class Gaming extends GameState {
         Hero hero = Globals.getInstance().getHero();
         hero.newX = 209;
         hero.newY = 2;
+        hero.x = 209;
+        hero.y = 2;
         hero.setPosition(209, 2);
         
         endState = NAME;

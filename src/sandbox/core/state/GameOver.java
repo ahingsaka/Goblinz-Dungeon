@@ -18,7 +18,7 @@ public class GameOver extends GameState {
 
     @Override
     protected void display() {
-        gameOverTextLayer = displayManager.fontManager.createTextLayer("Game Over", 230, 170);
+        gameOverTextLayer = displayManager.fontManager.createTextLayer("Game Over", 300, 200);
         gameOverTextLayer.setAlpha(0);
     }
 
@@ -56,6 +56,8 @@ public class GameOver extends GameState {
                 Hero hero = Globals.getInstance().getHero();
                 hero.newX = 209;
                 hero.newY = 2;
+                hero.x = 209;
+                hero.y = 2;
                 hero.setPosition(209, 2);
                 hero.isFalling = false;
                 hero.isFallingLeft = false;
