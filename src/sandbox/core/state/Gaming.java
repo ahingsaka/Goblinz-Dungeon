@@ -56,6 +56,8 @@ public class Gaming extends GameState {
             checkCollisions(d);
             checkMovements();
             gravityCheck();
+            
+            Globals.getInstance().getHero().update(d);
         }
     }
 

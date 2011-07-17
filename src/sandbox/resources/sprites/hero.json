@@ -1,8 +1,15 @@
 {
-  "urls": ["images/hero_big_v3.png"],
+  "urls": ["images/hero_big_v6.png"],
   "sprites": [
     {"id": "hero_right", "url": 0, "x": 0, "y": 0, "w": 56, "h": 58},
     {"id": "hero_left", "url": 0, "x": 56, "y": 0, "w": 56, "h": 58},
-    {"id": "hero_die", "url": 0, "x": 112, "y": 0, "w": 45, "h": 58}
+    {"id": "hero_die", "url": 0, "x": 112, "y": 0, "w": 56, "h": 58},
+    {"id": "hero_sword0", "url": 0, "x": 168, "y": 0, "w": 48, "h": 58},
+    {"id": "hero_sword1", "url": 0, "x": 216, "y": 0, "w": 110, "h": 58},
+    {"id": "hero_sword2", "url": 0, "x": 326, "y": 0, "w": 48, "h": 58}
+  ],
+  
+  "animations": [
+  	{"id": "hero_sword", "looping": false, "frameTime": 500, "sprite_ids": ["hero_sword0", "hero_sword1", "hero_sword2"]}
   ]
 }

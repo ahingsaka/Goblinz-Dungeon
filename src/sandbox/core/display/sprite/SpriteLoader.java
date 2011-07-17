@@ -19,10 +19,15 @@ import static forplay.core.ForPlay.assetManager;
 import static forplay.core.ForPlay.graphics;
 import static forplay.core.ForPlay.json;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import forplay.core.Asserts;
 import forplay.core.AssetWatcher;
 import forplay.core.Image;
 import forplay.core.Json;
+import forplay.core.Json.Array;
+import forplay.core.Json.Object;
 import forplay.core.ResourceCallback;
 
 /**
@@ -205,5 +210,29 @@ public class SpriteLoader {
             SpriteImage spriteImage = new SpriteImage(images[imageId], x, y, width, height);
             sprite.addSpriteImage(id, spriteImage);
         }
+
+        // asa : parse the animations
+        Json.Array animations = document.getArray("animations");
+        if (animations != null) {
+            for (int i = 0; i < animations.length(); i++) {
+                Json.Object animation = animations.getObject(i);
+
+                String id = animation.getString("id");
+                boolean looping = animation.getBoolean("looping");
+                int frameTime = animation.getInt("frametime");
+                Array spriteIds = animation.getArray("sprite_ids");
+
+                List<String> ids = new ArrayList<String>();
+                for (int j = 0; j < spriteIds.length(); j++) {
+                    String animationSpriteId = spriteIds.getString(j);
+                    ids.add(animationSpriteId);
+                }
+                
+                Animation spriteAnimation = new Animation(frameTime, looping, ids);
+                
+                sprite.getAnimations().put(id, spriteAnimation);
+            }
+        }
+
     }
 }

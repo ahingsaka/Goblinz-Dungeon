@@ -3,12 +3,13 @@ package sandbox.core.entities;
 import static forplay.core.ForPlay.log;
 import sandbox.core.display.sprite.Sprite;
 import sandbox.core.display.sprite.SpriteLoader;
+import sandbox.core.display.sprite.Updatable;
 import sandbox.core.world.WorldObject;
 import forplay.core.GroupLayer;
 import forplay.core.Image;
 import forplay.core.ResourceCallback;
 
-public class Hero extends WorldObject {
+public class Hero extends WorldObject implements Updatable {
     
     public static String TYPE = "hero";
     private static final float STEP = (float) 0.1;
@@ -195,6 +196,16 @@ public class Hero extends WorldObject {
     public void setAlpha(float alpha) {
         this.alpha = alpha;
         sprite.layer().setAlpha(alpha);
+    }
+
+    @Override
+    public void update(float delta) {
+        
+        if (isSlicing) {
+            
+        }
+        
+        
     }
 
 }

@@ -14,7 +14,7 @@ public class End extends GameState {
     @Override
     protected void display() {
         displayManager.clear();
-        displayManager.fontManager.createTextLayer("Congratulations", 230, 170);
+        displayManager.fontManager.createTextLayer("Level complete", 235, 170);
     }
 
     @Override
