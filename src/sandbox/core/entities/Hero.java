@@ -16,6 +16,8 @@ public class Hero extends WorldObject {
     public static String JSON_IMAGE = "sprites/hero.json";
     private Sprite sprite;
     
+    public float alpha;
+    
     public boolean isMovingLeft;
     public boolean isMovingRight;
     public boolean isMovingUp;
@@ -179,6 +181,20 @@ public class Hero extends WorldObject {
     @Override
     public String getType() {
         return TYPE;
+    }
+
+    public void dies() {
+        sprite.setSprite("hero_die");
+    }
+
+    public void reset() {
+        sprite.setSprite(0);
+        setAlpha(1);
+    }
+    
+    public void setAlpha(float alpha) {
+        this.alpha = alpha;
+        sprite.layer().setAlpha(alpha);
     }
 
 }

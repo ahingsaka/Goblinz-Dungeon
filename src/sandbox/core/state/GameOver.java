@@ -11,6 +11,8 @@ public class GameOver extends GameState {
     public static final String NAME = "gameover";
     private TextLayer gameOverTextLayer;
     private boolean textHasLoaded;
+    
+    private boolean isHeroDying;
 
     public GameOver() {
         name = NAME;
@@ -24,12 +26,27 @@ public class GameOver extends GameState {
 
     @Override
     protected void update(float d) {
-        float alpha = gameOverTextLayer.alpha;
-        if (alpha < 1) {
-            alpha += 0.1;
-            gameOverTextLayer.setAlpha(alpha);
+        
+        if (isHeroDying) {
+            Hero hero = Globals.getInstance().getHero();
+            float alpha = hero.alpha;
+            
+            if (alpha > 0) {
+                alpha -= 0.1;
+                hero.setAlpha(alpha);
+            } else {
+                isHeroDying = false;
+            }
+            
         } else {
-            textHasLoaded = true;
+            float alpha = gameOverTextLayer.alpha;
+            if (alpha < 1) {
+                alpha += 0.1;
+                gameOverTextLayer.setAlpha(alpha);
+            } else {
+                textHasLoaded = true;
+            }
+            
         }
     }
 
@@ -37,6 +54,11 @@ public class GameOver extends GameState {
     protected void activate() {
         endState = NAME;
         textHasLoaded = false;
+        isHeroDying = true;
+        
+        Hero hero = Globals.getInstance().getHero();
+        hero.dies();
+        hero.alpha = 1;
     }
 
     @Override
@@ -54,6 +76,7 @@ public class GameOver extends GameState {
             if (textHasLoaded) {
                 
                 Hero hero = Globals.getInstance().getHero();
+                hero.reset();
                 hero.newX = 209;
                 hero.newY = 2;
                 hero.x = 209;
