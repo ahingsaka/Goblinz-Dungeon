@@ -177,7 +177,11 @@ public class Hero extends WorldObject implements Updatable {
     }
 
     public void sword() {
-        sprite.setCurrentAnimation("hero_sword");
+        if (isFacingRight) {
+            sprite.setCurrentAnimation("hero_sword_right");
+        } else if (isFacingLeft) {
+            sprite.setCurrentAnimation("hero_sword_left");
+        }
         sprite.getCurrentAnimation().start();
     }
 
