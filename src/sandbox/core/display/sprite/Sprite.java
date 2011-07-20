@@ -53,9 +53,25 @@ public class Sprite {
     
     // asa: add animations in sprite class
     private Map<String, Animation> animations;
+    private Animation currentAnimation;
     
     public Map<String, Animation> getAnimations() {
         return animations;
+    }
+    
+    public void setCurrentAnimation(String animationName) {
+        if (animationName == null) {
+            currentAnimation = null;
+        }
+        
+        if (animations.containsKey(animationName)) {
+            Animation animationFound = animations.get(animationName);
+            currentAnimation = animationFound;
+        }
+    }
+    
+    public Animation getCurrentAnimation() {
+        return currentAnimation;
     }
     
     /**

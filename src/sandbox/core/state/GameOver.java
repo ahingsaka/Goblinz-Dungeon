@@ -91,8 +91,8 @@ public class GameOver extends GameState {
                 hero.isMovingDown = false;
                 hero.isMovingLeft = false;
                 hero.isMovingUp = false;
-                hero.isSlicing = false;
-                
+                hero.isFacingLeft = false;
+                hero.isFacingRight = true;
                 
                 endState = Intro.NAME;
             }

@@ -10,6 +10,6 @@
   ],
   
   "animations": [
-  	{"id": "hero_sword", "looping": false, "frameTime": 500, "sprite_ids": ["hero_sword0", "hero_sword1", "hero_sword2"]}
+  	{"id": "hero_sword", "looping": false, "frametime": 125, "sprite_ids": ["hero_sword0", "hero_sword1", "hero_sword2"]}
   ]
 }
