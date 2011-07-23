@@ -45,6 +45,13 @@ public class Animation {
                     frameIndex = (frameIndex + 1) % spriteIds.size();
                 } else {
                     frameIndex = Math.min(frameIndex + 1, spriteIds.size() - 1);
+//                    System.out.println(spriteIds.size());
+//                    if (frameIndex == spriteIds.size() - 1) {
+//                        frameIndex = 0;
+//                    } else {
+//                        frameIndex++;
+//                    }
+//                    
                 }
             }
 
@@ -59,6 +66,7 @@ public class Animation {
         }
 
         if (!looping) {
+            System.out.println(frameIndex);
             if (frameIndex == spriteIds.size() - 1) {
                 hasFinished = true;
                 hasBegun = false;
@@ -70,11 +78,22 @@ public class Animation {
 
     public void start() {
         if (!hasBegun) {
+            System.out.println("edefdefef");
             this.time = 0;
             this.frameIndex = 0;
             this.hasFinished = false;
             this.hasBegun = true;
         }
+    }
+
+    public void stop() {
+        if (hasBegun) {
+            this.time = 0;
+            this.frameIndex = 0;
+            this.hasFinished = true;
+            this.hasBegun = false;
+        }
+        
     }
 
 }

@@ -50,30 +50,34 @@ public class Sprite {
                                         // loading
     private boolean dataDone = false; // true when sprite data has finished
                                       // loading
-    
+
     // asa: add animations in sprite class
     private Map<String, Animation> animations;
     private Animation currentAnimation;
-    
+
     public Map<String, Animation> getAnimations() {
         return animations;
     }
-    
+
     public void setCurrentAnimation(String animationName) {
         if (animationName == null) {
+            if (currentAnimation != null) {
+                currentAnimation.stop();
+            }
             currentAnimation = null;
         }
-        
+
         if (animations.containsKey(animationName)) {
             Animation animationFound = animations.get(animationName);
             currentAnimation = animationFound;
         }
+
     }
-    
+
     public Animation getCurrentAnimation() {
         return currentAnimation;
     }
-    
+
     /**
      * Do not call directly. Create using
      * {@link SpriteLoader#getSprite(String, String)}
@@ -82,7 +86,7 @@ public class Sprite {
         this.layer = imageLayer;
         spriteImages = new ArrayList<SpriteImage>(0);
         spriteIdMap = new HashMap<String, Integer>();
-        
+
         // asa
         animations = new HashMap<String, Animation>();
     }
@@ -104,7 +108,7 @@ public class Sprite {
     public ImageLayer layer() {
         return layer;
     }
-    
+
     /**
      * Return the number of sprites.
      */

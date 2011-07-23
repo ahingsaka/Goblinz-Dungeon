@@ -424,6 +424,8 @@ public class Gaming extends GameState {
             Globals.getInstance().getHero().upLeft();
             break;
         case Keyboard.KEY_RIGHT:
+            // FIXME is there a forplay bug ?
+            System.out.println("isReleased");
             Globals.getInstance().getHero().upRight();
             break;
         case Keyboard.KEY_DOWN:

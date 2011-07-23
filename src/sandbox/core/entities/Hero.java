@@ -19,7 +19,7 @@ public class Hero extends WorldObject implements Updatable {
     private Sprite sprite;
 
     public float alpha;
-    
+
     public boolean isFacingLeft;
     public boolean isFacingRight;
 
@@ -94,7 +94,7 @@ public class Hero extends WorldObject implements Updatable {
         newX = x - STEP;
         isMovingRight = false;
         isMovingLeft = true;
-        
+
         isFacingRight = false;
         isFacingLeft = true;
 
@@ -118,16 +118,19 @@ public class Hero extends WorldObject implements Updatable {
         newX = x + STEP;
         isMovingRight = true;
         isMovingLeft = false;
-        
+
+        if (!isJumping) {
+            if (isFacingRight) {
+                sprite.setCurrentAnimation("hero_walk_right");
+                sprite.getCurrentAnimation().start();
+            } else {
+                //sprite.setSprite("hero_right");
+            }
+        }
+
         isFacingRight = true;
         isFacingLeft = false;
 
-        if (!isJumping) {
-            // TODO do not set if already set
-            sprite.setSprite("hero_right");
-        }
-        // x = x + STEP;
-        // sprite.layer().setTranslation(x, y);
     }
 
     public void moveDown() {
@@ -155,6 +158,9 @@ public class Hero extends WorldObject implements Updatable {
 
     public void upRight() {
         isMovingRight = false;
+        // FIXME is there a forplay bug ?
+//        sprite.setCurrentAnimation(null);
+//        sprite.setSprite("hero_right");
     }
 
     public void upDown() {
@@ -221,13 +227,13 @@ public class Hero extends WorldObject implements Updatable {
                 sprite.setSprite(currentFrameId);
             } else {
                 sprite.setCurrentAnimation(null);
-                
-                if (isFacingLeft) {
+
+                if (isFacingLeft && !isMovingLeft) {
                     sprite.setSprite("hero_left");
-                } else if (isFacingRight) {
-                    sprite.setSprite("hero_right");
+                } else if (isFacingRight && !isMovingRight) {
+                    //sprite.setSprite("hero_right");
                 }
-                
+
             }
         }
     }
