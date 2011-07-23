@@ -95,14 +95,17 @@ public class Hero extends WorldObject implements Updatable {
         isMovingRight = false;
         isMovingLeft = true;
 
+        if (!isJumping) {
+            if (isFacingLeft) {
+                sprite.setCurrentAnimation("hero_walk_left");
+                sprite.getCurrentAnimation().start();
+            } else {
+                //sprite.setSprite("hero_right");
+            }
+        }
+
         isFacingRight = false;
         isFacingLeft = true;
-
-        if (!isJumping) {
-            sprite.setSprite("hero_left");
-        }
-        // x = x - STEP;
-        // sprite.layer().setTranslation(x, y);
     }
 
     public void moveUp() {
@@ -150,6 +153,9 @@ public class Hero extends WorldObject implements Updatable {
 
     public void upLeft() {
         isMovingLeft = false;
+        // FIXME is there a forplay bug ?
+//      sprite.setCurrentAnimation(null);
+//      sprite.setSprite("hero_left");
     }
 
     public void upUp() {
@@ -229,7 +235,7 @@ public class Hero extends WorldObject implements Updatable {
                 sprite.setCurrentAnimation(null);
 
                 if (isFacingLeft && !isMovingLeft) {
-                    sprite.setSprite("hero_left");
+                    //sprite.setSprite("hero_left");
                 } else if (isFacingRight && !isMovingRight) {
                     //sprite.setSprite("hero_right");
                 }
