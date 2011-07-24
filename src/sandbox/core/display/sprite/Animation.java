@@ -78,7 +78,6 @@ public class Animation {
 
     public void start() {
         if (!hasBegun) {
-            System.out.println("edefdefef");
             this.time = 0;
             this.frameIndex = 0;
             this.hasFinished = false;

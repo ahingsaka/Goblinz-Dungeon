@@ -52,6 +52,8 @@ public class Sprite {
                                       // loading
 
     // asa: add animations in sprite class
+    
+    private String currentStringId = null;
     private Map<String, Animation> animations;
     private Animation currentAnimation;
 
@@ -157,6 +159,14 @@ public class Sprite {
      * Set the current sprite via the sprite's id.
      */
     public void setSprite(String id) {
+        
+        // asa
+        if (currentStringId != null) {
+            if (id.equals(currentStringId)) {
+                return;
+            }
+        }
+        
         setSprite(Asserts.checkNotNull(spriteIdMap.get(id), "Invalid sprite id"));
     }
 

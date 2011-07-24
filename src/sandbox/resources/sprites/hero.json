@@ -1,5 +1,5 @@
 {
-  "urls": ["images/hero_big_v9.png"],
+  "urls": ["images/hero_big_v10.png"],
   "sprites": [
     {"id": "hero_right", "url": 0, "x": 0, "y": 0, "w": 56, "h": 58},
     {"id": "hero_left", "url": 0, "x": 56, "y": 0, "w": 56, "h": 58},
@@ -18,7 +18,12 @@
     {"id": "hero_walk_right1", "url": 0, "x": 56, "y": 58, "w": 56, "h": 58},
     
     {"id": "hero_walk_left0", "url": 0, "x": 0, "y": 116, "w": 56, "h": 58},
-    {"id": "hero_walk_left1", "url": 0, "x": 56, "y": 116, "w": 56, "h": 58}
+    {"id": "hero_walk_left1", "url": 0, "x": 56, "y": 116, "w": 56, "h": 58},
+    
+    {"id": "hero_jump_right0", "url": 0, "x": 0, "y": 174, "w": 56, "h": 86},
+    {"id": "hero_jump_right1", "url": 0, "x": 112, "y": 174, "w": 60, "h": 52},
+    {"id": "hero_jump_left0", "url": 0, "x": 56, "y": 174, "w": 56, "h": 86},
+    {"id": "hero_jump_left1", "url": 0, "x": 172, "y": 174, "w": 60, "h": 52}
     
   ],
   

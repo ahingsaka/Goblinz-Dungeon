@@ -50,20 +50,20 @@ public class Gaming extends GameState {
     protected void update(float d) {
         if (isExitingLevel) {
             makeScreenDisappear();
-            
+
         } else {
             calculateJump();
             checkCollisions(d);
             checkMovements();
             gravityCheck();
-            
+
             Globals.getInstance().getHero().update(d);
         }
     }
 
     private void makeScreenDisappear() {
         float alpha = displayManager.alpha;
-        
+
         if (alpha > 0) {
             alpha -= 0.1;
             displayManager.setAlpha(alpha);
@@ -99,10 +99,10 @@ public class Gaming extends GameState {
                 hero.isJumping = false;
 
                 if (hero.isJumpingRight) {
-                    hero.isFallingRight = true;
+                    hero.setFallingRight(true);
                     hero.isJumpingRight = false;
                 } else if (hero.isJumpingLeft) {
-                    hero.isFallingLeft = true;
+                    hero.setFallingLeft(true);
                     hero.isJumpingLeft = false;
                 }
 
@@ -127,9 +127,9 @@ public class Gaming extends GameState {
 
         else if (hero.isFalling) {
 
-            if (hero.isFallingRight) {
+            if (hero.isFallingRight()) {
                 hero.newX = hero.x + (float) 0.1;
-            } else if (hero.isFallingLeft) {
+            } else if (hero.isFallingLeft()) {
                 hero.newX = hero.x - (float) 0.1;
             }
 
@@ -364,28 +364,28 @@ public class Gaming extends GameState {
             // System.out.println("collision");
             hero.newY = hero.y;
             hero.isFalling = false;
-            hero.isFallingLeft = false;
-            hero.isFallingRight = false;
+            hero.setFallingLeft(false);
+            hero.setFallingRight(false);
         }
     }
 
     @Override
     protected void activate() {
-        
+
         Hero hero = Globals.getInstance().getHero();
         hero.newX = 209;
         hero.newY = 2;
         hero.x = 209;
         hero.y = 2;
         hero.setPosition(209, 2);
-        
+
         endState = NAME;
         displayManager.show();
     }
 
     @Override
     protected void deactivate() {
-        //displayManager.clear();
+        // displayManager.clear();
     }
 
     @Override

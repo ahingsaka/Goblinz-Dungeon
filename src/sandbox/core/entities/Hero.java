@@ -41,8 +41,33 @@ public class Hero extends WorldObject implements Updatable {
     public float y = 6;
 
     public boolean isFalling;
-    public boolean isFallingRight;
-    public boolean isFallingLeft;
+    
+    private boolean isFallingRight;
+    private boolean isFallingLeft;
+
+    public boolean isFallingRight() {
+        return isFallingRight;
+    }
+
+    public void setFallingRight(boolean isFallingRight) {
+        this.isFallingRight = isFallingRight;
+        if (isFallingRight) {
+            sprite.setCurrentAnimation(null);
+            sprite.setSprite("hero_jump_right1");
+        }
+    }
+
+    public boolean isFallingLeft() {
+        return isFallingLeft;
+    }
+
+    public void setFallingLeft(boolean isFallingLeft) {
+        this.isFallingLeft = isFallingLeft;
+        if (isFallingLeft) {
+            sprite.setCurrentAnimation(null);
+            sprite.setSprite("hero_jump_left1");
+        }
+    }
 
     public Hero(int x, int y) {
         this.x = x;
@@ -180,6 +205,16 @@ public class Hero extends WorldObject implements Updatable {
                 isJumpingRight = true;
             } else if (isMovingLeft) {
                 isJumpingLeft = true;
+            } else {
+                
+                // jump straight
+                if (isFacingLeft) {
+                    sprite.setCurrentAnimation(null);
+                    sprite.setSprite("hero_jump_left0");
+                } else {
+                    sprite.setCurrentAnimation(null);
+                    sprite.setSprite("hero_jump_right0");
+                }
             }
 
             isJumping = true;
