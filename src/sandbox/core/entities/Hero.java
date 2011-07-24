@@ -19,6 +19,8 @@ public class Hero extends WorldObject implements Updatable {
     private Sprite sprite;
 
     public float alpha;
+    
+    public boolean isIdle;
 
     public boolean isFacingLeft;
     public boolean isFacingRight;
@@ -203,8 +205,14 @@ public class Hero extends WorldObject implements Updatable {
 
             if (isMovingRight) {
                 isJumpingRight = true;
+                sprite.setCurrentAnimation(null);
+                sprite.setSprite("hero_jump_move_right");
+                
             } else if (isMovingLeft) {
                 isJumpingLeft = true;
+                sprite.setCurrentAnimation(null);
+                sprite.setSprite("hero_jump_move_left");
+                
             } else {
                 
                 // jump straight

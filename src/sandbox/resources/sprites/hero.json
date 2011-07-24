@@ -23,8 +23,11 @@
     {"id": "hero_jump_right0", "url": 0, "x": 0, "y": 174, "w": 56, "h": 86},
     {"id": "hero_jump_right1", "url": 0, "x": 112, "y": 174, "w": 60, "h": 52},
     {"id": "hero_jump_left0", "url": 0, "x": 56, "y": 174, "w": 56, "h": 86},
-    {"id": "hero_jump_left1", "url": 0, "x": 172, "y": 174, "w": 60, "h": 52}
+    {"id": "hero_jump_left1", "url": 0, "x": 172, "y": 174, "w": 60, "h": 52},
     
+    {"id": "hero_jump_move_right", "url": 0, "x": 232, "y": 174, "w": 61, "h": 65},
+    {"id": "hero_jump_move_left", "url": 0, "x": 293, "y": 174, "w": 61, "h": 65}
+        
   ],
   
   "animations": [
