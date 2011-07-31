@@ -1,21 +1,14 @@
-package sandbox.core.entities;
+package sandbox.core.entities.statik.rock;
 
 import static forplay.core.ForPlay.assetManager;
-import sandbox.core.world.WorldObject;
-import forplay.core.Image;
+import sandbox.core.world.StaticWorldObject;
 
-public class Rock extends WorldObject {
+public class Rock extends StaticWorldObject {
 
     public static String TYPE = "rock";
-    private Image image;
 
     public Rock() {
         image = assetManager().getImage("images/rock_56x58.png");
-    }
-
-    @Override
-    public Image getImage() {
-        return image;
     }
 
     @Override

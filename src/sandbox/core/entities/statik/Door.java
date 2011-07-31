@@ -1,21 +1,14 @@
-package sandbox.core.entities;
+package sandbox.core.entities.statik;
 
 import static forplay.core.ForPlay.assetManager;
-import sandbox.core.world.WorldObject;
-import forplay.core.Image;
+import sandbox.core.world.StaticWorldObject;
 
-public class Door extends WorldObject {
+public class Door extends StaticWorldObject {
 
     public static String TYPE = "door";
-    private Image image;
 
     public Door() {
         image = assetManager().getImage("images/door.png");
-    }
-
-    @Override
-    public Image getImage() {
-        return image;
     }
 
     @Override

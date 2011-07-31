@@ -1,12 +1,12 @@
 package sandbox.core.world;
 
-import sandbox.core.entities.Door;
-import sandbox.core.entities.InvisibleRock;
-import sandbox.core.entities.Rock;
-import sandbox.core.entities.RockLeft;
-import sandbox.core.entities.RockMiddle;
-import sandbox.core.entities.RockRight;
-import sandbox.core.entities.RockUp;
+import sandbox.core.entities.statik.Door;
+import sandbox.core.entities.statik.rock.InvisibleRock;
+import sandbox.core.entities.statik.rock.Rock;
+import sandbox.core.entities.statik.rock.RockLeft;
+import sandbox.core.entities.statik.rock.RockMiddle;
+import sandbox.core.entities.statik.rock.RockRight;
+import sandbox.core.entities.statik.rock.RockUp;
 import forplay.core.AssetWatcher;
 import forplay.core.ForPlay;
 import forplay.core.Json;

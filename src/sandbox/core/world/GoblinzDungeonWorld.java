@@ -1,9 +1,9 @@
 package sandbox.core.world;
 
 import sandbox.core.Globals;
-import sandbox.core.entities.Door;
 import sandbox.core.entities.Hero;
-import sandbox.core.entities.InvisibleRock;
+import sandbox.core.entities.statik.Door;
+import sandbox.core.entities.statik.rock.InvisibleRock;
 import forplay.core.Surface;
 
 public class GoblinzDungeonWorld {
