@@ -119,6 +119,8 @@ public class Hero extends WorldObject implements Updatable {
 
     public void moveLeft() {
         newX = x - STEP;
+        
+        System.out.println(newX);
         isMovingRight = false;
         isMovingLeft = true;
 
@@ -146,6 +148,7 @@ public class Hero extends WorldObject implements Updatable {
 
     public void moveRight() {
         newX = x + STEP;
+        System.out.println(newX);
         isMovingRight = true;
         isMovingLeft = false;
 

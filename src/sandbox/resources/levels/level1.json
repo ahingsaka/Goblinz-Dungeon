@@ -640,11 +640,11 @@
 		{"type": "rock", "x": 184, "y": 5},
 		{"type": "rock", "x": 185, "y": 5},
 		
-		{"type": "rock", "x": 187, "y": 4},
+		{"type": "rock-left", "x": 187, "y": 4},
 		{"type": "rock", "x": 188, "y": 4},
 		{"type": "rock", "x": 189, "y": 4},
 		
-		{"type": "rock", "x": 192, "y": 6},
+		{"type": "rock-left", "x": 192, "y": 6},
 		{"type": "rock", "x": 193, "y": 6},
 		{"type": "rock", "x": 194, "y": 6},
 		

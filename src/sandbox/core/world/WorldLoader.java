@@ -3,6 +3,7 @@ package sandbox.core.world;
 import sandbox.core.entities.Door;
 import sandbox.core.entities.InvisibleRock;
 import sandbox.core.entities.Rock;
+import sandbox.core.entities.RockLeft;
 import sandbox.core.entities.RockUp;
 import forplay.core.AssetWatcher;
 import forplay.core.ForPlay;
@@ -22,6 +23,7 @@ public class WorldLoader {
             public void done(String resource) {
 
                 RockUp rockUp = new RockUp();
+                RockLeft rockLeft = new RockLeft();
                 Rock rock = new Rock();
                 Door door = new Door();
                 InvisibleRock invisibleRock = new InvisibleRock();
@@ -61,6 +63,8 @@ public class WorldLoader {
                         worldObject = rock;
                     } else if (RockUp.TYPE.equalsIgnoreCase(type)) {
                         worldObject = rockUp;
+                    } else if (RockLeft.TYPE.equalsIgnoreCase(type)) {
+                        worldObject = rockLeft;
                     } else if (Door.TYPE.equalsIgnoreCase(type)) {
                         worldObject = door;
                     } else if (InvisibleRock.TYPE.equalsIgnoreCase(type)) {
