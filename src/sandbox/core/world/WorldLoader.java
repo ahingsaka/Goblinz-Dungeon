@@ -4,6 +4,7 @@ import sandbox.core.entities.Door;
 import sandbox.core.entities.InvisibleRock;
 import sandbox.core.entities.Rock;
 import sandbox.core.entities.RockLeft;
+import sandbox.core.entities.RockMiddle;
 import sandbox.core.entities.RockRight;
 import sandbox.core.entities.RockUp;
 import forplay.core.AssetWatcher;
@@ -26,6 +27,8 @@ public class WorldLoader {
                 RockUp rockUp = new RockUp();
                 RockLeft rockLeft = new RockLeft();
                 RockRight rockRight = new RockRight();
+                RockMiddle rockMiddle = new RockMiddle();
+                
                 Rock rock = new Rock();
                 Door door = new Door();
                 InvisibleRock invisibleRock = new InvisibleRock();
@@ -69,6 +72,8 @@ public class WorldLoader {
                         worldObject = rockLeft;
                     } else if (RockRight.TYPE.equalsIgnoreCase(type)) {
                         worldObject = rockRight;
+                    } else if (RockMiddle.TYPE.equalsIgnoreCase(type)) {
+                        worldObject = rockMiddle;
                     } else if (Door.TYPE.equalsIgnoreCase(type)) {
                         worldObject = door;
                     } else if (InvisibleRock.TYPE.equalsIgnoreCase(type)) {
