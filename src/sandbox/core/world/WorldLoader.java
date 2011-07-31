@@ -3,6 +3,7 @@ package sandbox.core.world;
 import sandbox.core.entities.Door;
 import sandbox.core.entities.InvisibleRock;
 import sandbox.core.entities.Rock;
+import sandbox.core.entities.RockUp;
 import forplay.core.AssetWatcher;
 import forplay.core.ForPlay;
 import forplay.core.Json;
@@ -19,11 +20,12 @@ public class WorldLoader {
 
             @Override
             public void done(String resource) {
-                
+
+                RockUp rockUp = new RockUp();
                 Rock rock = new Rock();
                 Door door = new Door();
                 InvisibleRock invisibleRock = new InvisibleRock();
-                
+
                 AssetWatcher assetWatcher = new AssetWatcher(new AssetWatcher.Listener() {
 
                     @Override
@@ -37,39 +39,41 @@ public class WorldLoader {
                     }
 
                 });
-                
+
                 Json.Object document = ForPlay.json().parse(resource);
-                
+
                 int width = document.getInt("width");
                 int height = document.getInt("height");
-                
+
                 goblinzDungeonWorld.initWorldTab(width, height);
-                
+
                 Array array = document.getArray("Entities");
                 for (int i = 0; i < array.length(); i++) {
-                    
+
                     Object entity = array.getObject(i);
                     String type = entity.getString("type");
                     int x = entity.getInt("x");
                     int y = entity.getInt("y");
-                    
+
                     WorldObject worldObject = null;
-                    
+
                     if (Rock.TYPE.equalsIgnoreCase(type)) {
                         worldObject = rock;
+                    } else if (RockUp.TYPE.equalsIgnoreCase(type)) {
+                        worldObject = rockUp;
                     } else if (Door.TYPE.equalsIgnoreCase(type)) {
                         worldObject = door;
                     } else if (InvisibleRock.TYPE.equalsIgnoreCase(type)) {
                         worldObject = invisibleRock;
                     }
-                    
+
                     if (entity != null) {
                         assetWatcher.add(worldObject.getImage());
                         goblinzDungeonWorld.add(worldObject, x, y);
                     }
-                    
+
                 }
-                
+
                 assetWatcher.start();
 
             }
