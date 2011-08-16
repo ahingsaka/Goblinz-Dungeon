@@ -1,5 +1,8 @@
 package sandbox.core.world;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import sandbox.core.Globals;
 import sandbox.core.entities.Hero;
 import sandbox.core.entities.statik.Door;
@@ -23,6 +26,8 @@ public class GoblinzDungeonWorld {
     private float viewOriginX = 0;
     private float viewOriginY = (float) 2.5;
     private boolean isLoaded = false;
+    
+    private List<WorldObject> enemies = new ArrayList<WorldObject>();
 
     public void setViewOrigin(float x, float y) {
         viewOriginX = x;
@@ -154,5 +159,10 @@ public class GoblinzDungeonWorld {
         }
 
         return result;
+    }
+
+    public void addEnemy(WorldObject worldObject) {
+        // TODO handles enemies
+        enemies.add(worldObject);
     }
 }

@@ -1,5 +1,6 @@
 package sandbox.core.world;
 
+import sandbox.core.entities.Goblin;
 import sandbox.core.entities.statik.Door;
 import sandbox.core.entities.statik.rock.InvisibleRock;
 import sandbox.core.entities.statik.rock.Rock;
@@ -85,6 +86,28 @@ public class WorldLoader {
                         goblinzDungeonWorld.add(worldObject, x, y);
                     }
 
+                }
+                
+                
+                // Create the array of enemies
+                Array enemiesArray = document.getArray("Enemies");
+                for (int i = 0; i < enemiesArray.length(); i++) {
+                    Object entity = enemiesArray.getObject(i);
+                    String type = entity.getString("type");
+                    int x = entity.getInt("x");
+                    int y = entity.getInt("y");
+                    WorldObject worldObject = null;
+                    
+                    // Only Goblins for the moment
+                    if (Goblin.TYPE.equalsIgnoreCase(type)) {
+                        worldObject = new Goblin(x, y);
+                    }
+                    
+                    if (entity != null) {
+                        assetWatcher.add(worldObject.getImage());
+                        goblinzDungeonWorld.addEnemy(worldObject);
+                    }
+                    
                 }
 
                 assetWatcher.start();
