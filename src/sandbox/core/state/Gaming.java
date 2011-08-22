@@ -86,7 +86,7 @@ public class Gaming extends GameState {
         float enemyX = enemy.getX();
         float heroX = hero.x;
 
-        int halfViewWidth = Globals.getInstance().getWorld().getHalfViewWidth();
+        int halfViewWidth = Globals.getInstance().getWorld().getHalfViewWidth() + 1;
 
         if (((heroX + halfViewWidth) >= enemyX) && ((enemyX >= (heroX - halfViewWidth)))) {
             isInRange = true;

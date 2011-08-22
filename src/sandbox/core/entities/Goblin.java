@@ -11,8 +11,6 @@ public class Goblin extends Enemy {
 
     public static String TYPE = "goblin";
 
-    public boolean isAttached = false;
-
     public static String JSON_IMAGE = "sprites/goblin.json";
     private Sprite sprite;
 
@@ -40,7 +38,7 @@ public class Goblin extends Enemy {
         });
     }
 
-    public void setPosition(float x, float y) {
+    public void setPosition(int x, int y) {
         sprite.layer().setTranslation(x, y);
     }
 
@@ -77,7 +75,7 @@ public class Goblin extends Enemy {
     public void attach() {
         if (!isAttached) {
             layer.add(sprite.layer());
-            setPosition(x, y);
+            setPosition((int) x, (int) y);
             isAttached = true;
         }
     }

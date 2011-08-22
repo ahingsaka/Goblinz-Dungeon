@@ -85,28 +85,28 @@ public class GoblinzDungeonWorld {
 
         for (int ty = startY; ty <= endY; ++ty) {
             for (int tx = startX; tx <= endX; ++tx) {
-
                 WorldObject sandboxObject = world[ty * worldWidth + tx];
-
-                if (sandboxObject != null) {
-
-                    // Figure out where the tile goes. If it's out of screen
-                    // bounds,
-                    // skip it
-                    int px = worldToPixelX(surf, tx);
-                    int py = worldToPixelY(surf, ty) - TILE_BASE;
-                    if ((px > surf.width()) || (py > surf.height()) || (px + TILE_WIDTH < 0)
-                            || (py + TILE_IMAGE_HEIGHT < 0)) {
-                        continue;
-                    }
-
-                    surf.drawImage(sandboxObject.getImage(), px, py);
-                }
-
+                draw(surf, ty, tx, sandboxObject);
             }
-
         }
     }
+
+    public void draw(Surface surf, int ty, int tx, WorldObject sandboxObject) {
+        if (sandboxObject != null) {
+            // Figure out where the tile goes. If it's out of screen
+            // bounds,
+            // skip it
+            int px = worldToPixelX(surf, tx);
+            int py = worldToPixelY(surf, ty) - TILE_BASE;
+            if ((px > surf.width()) || (py > surf.height()) || (px + TILE_WIDTH < 0)
+                    || (py + TILE_IMAGE_HEIGHT < 0)) {
+                return;
+            }
+
+            surf.drawImage(sandboxObject.getImage(), px, py);
+        }
+    }
+    
 
     public void paintHero(Surface surf, float alpha) {
         Hero hero = Globals.getInstance().getHero();
@@ -116,6 +116,12 @@ public class GoblinzDungeonWorld {
         // surf.drawImage(hero.getImage(), px, py);
         hero.setPosition(px, py);
 
+    }
+    
+    public void paintEnemy(Enemy enemy, Surface surface, float alpha) {
+        int px = worldToPixelX(surface, enemy.getX());
+        int py = worldToPixelY(surface, enemy.getY()) - TILE_BASE;
+        enemy.setPosition(px, py);
     }
 
     public void initWorldTab(int width, int height) {
@@ -179,4 +185,5 @@ public class GoblinzDungeonWorld {
     public int getHalfViewWidth() {
         return halfViewWidth;
     }
+
 }

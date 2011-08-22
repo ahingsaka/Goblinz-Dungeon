@@ -1,9 +1,13 @@
 package sandbox.core.display;
 
 import static forplay.core.ForPlay.graphics;
+
+import java.util.List;
+
 import sandbox.core.Globals;
 import sandbox.core.GoblinzDungeon;
 import sandbox.core.display.font.FontManager;
+import sandbox.core.entities.Enemy;
 import sandbox.core.entities.Hero;
 import sandbox.core.world.GoblinzDungeonWorld;
 import forplay.core.GroupLayer;
@@ -25,7 +29,7 @@ public class DisplayManager {
     private GoblinzDungeonWorld world;
 
     public DisplayManager() {
-        
+
         textLayer = graphics().createGroupLayer();
         characterLayer = graphics().createGroupLayer();
 
@@ -41,7 +45,7 @@ public class DisplayManager {
     public void setSize(int screenWidth, int screenHeight) {
         graphics().setSize(screenWidth, screenHeight);
     }
-    
+
     public GroupLayer getCharacterLayer() {
         return characterLayer;
     }
@@ -71,6 +75,15 @@ public class DisplayManager {
 
             world.paint(surface, alpha);
             world.paintHero(surface, alpha);
+
+            // Paint enemies
+            List<Enemy> enemies = Globals.getInstance().getWorld().getEnemies();
+            for (Enemy enemy : enemies) {
+                if (enemy.isAttached) {
+                    world.paintEnemy(enemy, surface, alpha);
+                }
+            }
+
         }
     }
 
@@ -80,18 +93,18 @@ public class DisplayManager {
         gameLayer.setVisible(false);
         setAlpha(1);
     }
-    
+
     public void show() {
         gameLayer.setVisible(true);
         characterLayer.setVisible(true);
         setAlpha(1);
     }
-    
+
     public void setAlpha(float alpha) {
         this.alpha = alpha;
         textLayer.setAlpha(alpha);
         characterLayer.setAlpha(alpha);
         gameLayer.setAlpha(alpha);
     }
-    
+
 }
