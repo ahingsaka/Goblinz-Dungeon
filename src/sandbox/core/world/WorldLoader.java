@@ -1,5 +1,6 @@
 package sandbox.core.world;
 
+import sandbox.core.entities.Enemy;
 import sandbox.core.entities.Goblin;
 import sandbox.core.entities.statik.Door;
 import sandbox.core.entities.statik.rock.InvisibleRock;
@@ -10,6 +11,7 @@ import sandbox.core.entities.statik.rock.RockRight;
 import sandbox.core.entities.statik.rock.RockUp;
 import forplay.core.AssetWatcher;
 import forplay.core.ForPlay;
+import forplay.core.GroupLayer;
 import forplay.core.Json;
 import forplay.core.Json.Array;
 import forplay.core.Json.Object;
@@ -18,7 +20,7 @@ import forplay.core.ResourceCallback;
 public class WorldLoader {
 
     public static void loadLevel(String level, final GoblinzDungeonWorld goblinzDungeonWorld,
-            final ResourceCallback<GoblinzDungeonWorld> callback) {
+            final GroupLayer groupLayer, final ResourceCallback<GoblinzDungeonWorld> callback) {
 
         ForPlay.assetManager().getText(level, new ResourceCallback<String>() {
 
@@ -29,7 +31,7 @@ public class WorldLoader {
                 RockLeft rockLeft = new RockLeft();
                 RockRight rockRight = new RockRight();
                 RockMiddle rockMiddle = new RockMiddle();
-                
+
                 Rock rock = new Rock();
                 Door door = new Door();
                 InvisibleRock invisibleRock = new InvisibleRock();
@@ -87,8 +89,7 @@ public class WorldLoader {
                     }
 
                 }
-                
-                
+
                 // Create the array of enemies
                 Array enemiesArray = document.getArray("Enemies");
                 for (int i = 0; i < enemiesArray.length(); i++) {
@@ -96,18 +97,18 @@ public class WorldLoader {
                     String type = entity.getString("type");
                     int x = entity.getInt("x");
                     int y = entity.getInt("y");
-                    WorldObject worldObject = null;
-                    
+                    Enemy enemy = null;
+
                     // Only Goblins for the moment
                     if (Goblin.TYPE.equalsIgnoreCase(type)) {
-                        worldObject = new Goblin(x, y);
+                        enemy = new Goblin(groupLayer, x, y);
                     }
-                    
+
                     if (entity != null) {
-                        assetWatcher.add(worldObject.getImage());
-                        goblinzDungeonWorld.addEnemy(worldObject);
+                        assetWatcher.add(enemy.getImage());
+                        goblinzDungeonWorld.addEnemy(enemy);
                     }
-                    
+
                 }
 
                 assetWatcher.start();

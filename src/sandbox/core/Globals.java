@@ -1,5 +1,6 @@
 package sandbox.core;
 
+import forplay.core.GroupLayer;
 import sandbox.core.entities.Hero;
 import sandbox.core.world.GoblinzDungeonWorld;
 
@@ -10,6 +11,8 @@ public class Globals {
     private Hero hero;
 
     private GoblinzDungeonWorld world;
+
+    private GroupLayer characterLayer;
 
     private Globals() {
 
@@ -33,6 +36,14 @@ public class Globals {
 
     public void setWorld(GoblinzDungeonWorld world) {
         this.world = world;
+    }
+
+    public void setCharacterLayer(GroupLayer characterLayer) {
+        this.characterLayer = characterLayer;
+    }
+    
+    public GroupLayer getCharacterLayer() {
+        return characterLayer;
     }
 
 }

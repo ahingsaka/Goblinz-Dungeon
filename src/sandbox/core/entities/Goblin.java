@@ -3,23 +3,22 @@ package sandbox.core.entities;
 import static forplay.core.ForPlay.log;
 import sandbox.core.display.sprite.Sprite;
 import sandbox.core.display.sprite.SpriteLoader;
-import sandbox.core.display.sprite.Updatable;
-import sandbox.core.world.WorldObject;
 import forplay.core.GroupLayer;
 import forplay.core.Image;
 import forplay.core.ResourceCallback;
 
-public class Goblin extends WorldObject implements Updatable {
-    
+public class Goblin extends Enemy {
+
     public static String TYPE = "goblin";
-    
-    public float x = 0;
-    public float y = 0;
-    
+
+    public boolean isAttached = false;
+
     public static String JSON_IMAGE = "sprites/goblin.json";
     private Sprite sprite;
-    
-    public Goblin(int x, int y) {
+
+    private GroupLayer layer;
+
+    public Goblin(final GroupLayer characterLayer, final int x, final int y) {
         this.x = x;
         this.y = y;
         sprite = SpriteLoader.getSprite(JSON_IMAGE);
@@ -28,21 +27,34 @@ public class Goblin extends WorldObject implements Updatable {
             public void error(Throwable err) {
                 log().error("Error loading image!", err);
             }
-            
+
             @Override
-            public void done(Sprite resource) {
-//                sprite.setSprite("");
+            public void done(Sprite sprite) {
+                sprite.setSprite(0);
+                layer = characterLayer;
+                // FIXME hell, there must be a fucking bug, coz, the hero sprite
+                // is added as well !!! (change the goblin size to see this !!)
+                // characterLayer.add(sprite.layer());
+                // setPosition(x, y);
             }
         });
     }
-    
+
+    public void setPosition(float x, float y) {
+        sprite.layer().setTranslation(x, y);
+    }
+
     public void addToGroupLayer(GroupLayer characterLayer) {
         characterLayer.add(sprite.layer());
     }
 
     @Override
     public void update(float delta) {
-        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void updateAll() {
 
     }
 
@@ -59,6 +71,15 @@ public class Goblin extends WorldObject implements Updatable {
     @Override
     public String getType() {
         return TYPE;
+    }
+
+    @Override
+    public void attach() {
+        if (!isAttached) {
+            layer.add(sprite.layer());
+            setPosition(x, y);
+            isAttached = true;
+        }
     }
 
 }

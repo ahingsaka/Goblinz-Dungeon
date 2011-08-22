@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sandbox.core.Globals;
+import sandbox.core.GoblinzDungeon;
+import sandbox.core.entities.Enemy;
 import sandbox.core.entities.Hero;
 import sandbox.core.entities.statik.Door;
 import sandbox.core.entities.statik.rock.InvisibleRock;
@@ -17,7 +19,7 @@ public class GoblinzDungeonWorld {
     private static final int TILE_HEIGHT = 57;
 
     private static final int TILE_BASE = 0;
-
+    
     // Taille reelle des images de tiles (-1)
     private static final int TILE_WIDTH = 55;
     private static final int TILE_IMAGE_HEIGHT = 57;
@@ -27,7 +29,9 @@ public class GoblinzDungeonWorld {
     private float viewOriginY = (float) 2.5;
     private boolean isLoaded = false;
     
-    private List<WorldObject> enemies = new ArrayList<WorldObject>();
+    private List<Enemy> enemies = new ArrayList<Enemy>();
+    
+    private int halfViewWidth = 0;
 
     public void setViewOrigin(float x, float y) {
         viewOriginX = x;
@@ -118,6 +122,9 @@ public class GoblinzDungeonWorld {
         worldWidth = width;
         worldHeight = height;
         world = new WorldObject[worldWidth * worldHeight];
+        
+        halfViewWidth = (worldWidth / (GoblinzDungeon.SCREEN_WIDTH / TILE_WIDTH)) / 2;
+        
     }
 
     public void add(WorldObject worldObject, int x, int y) {
@@ -161,8 +168,15 @@ public class GoblinzDungeonWorld {
         return result;
     }
 
-    public void addEnemy(WorldObject worldObject) {
-        // TODO handles enemies
-        enemies.add(worldObject);
+    public void addEnemy(Enemy enemy) {
+        enemies.add(enemy);
+    }
+
+    public List<Enemy> getEnemies() {
+        return enemies;
+    }
+    
+    public int getHalfViewWidth() {
+        return halfViewWidth;
     }
 }

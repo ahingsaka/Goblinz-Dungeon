@@ -1,6 +1,7 @@
 {
-	"urls": ["images/goblin.png"],
+	"urls": ["images/goblin_v1.png"],
 	"sprites": [
+		{"id": "goblin_stand", "url":0, "x": 0, "y":0, "w":56, "h": 58}
 	],
 	"animations": [
 	]

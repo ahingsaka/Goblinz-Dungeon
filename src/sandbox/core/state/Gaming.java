@@ -1,14 +1,17 @@
 package sandbox.core.state;
 
-import forplay.core.ForPlay;
-import forplay.core.Keyboard;
-import forplay.core.ResourceCallback;
+import java.util.List;
+
 import sandbox.core.Globals;
+import sandbox.core.entities.Enemy;
 import sandbox.core.entities.Hero;
 import sandbox.core.fsm.GameState;
 import sandbox.core.world.Collision;
 import sandbox.core.world.GoblinzDungeonWorld;
 import sandbox.core.world.WorldLoader;
+import forplay.core.ForPlay;
+import forplay.core.Keyboard;
+import forplay.core.ResourceCallback;
 
 public class Gaming extends GameState {
 
@@ -26,21 +29,21 @@ public class Gaming extends GameState {
     protected void display() {
 
         if (!hasLoaded) {
-            WorldLoader.loadLevel("levels/level1.json", Globals.getInstance().getWorld(),
-                    new ResourceCallback<GoblinzDungeonWorld>() {
+            WorldLoader.loadLevel("levels/level1.json", Globals.getInstance().getWorld(), Globals.getInstance()
+                    .getCharacterLayer(), new ResourceCallback<GoblinzDungeonWorld>() {
 
-                        @Override
-                        public void error(Throwable err) {
-                            ForPlay.log().error("Error loading world: " + err.getMessage());
-                        }
+                @Override
+                public void error(Throwable err) {
+                    ForPlay.log().error("Error loading world: " + err.getMessage());
+                }
 
-                        @Override
-                        public void done(GoblinzDungeonWorld resource) {
-                            // System.out.println("loaded");
-                            resource.setIsLoaded(true);
-                            hasLoaded = true;
-                        }
-                    });
+                @Override
+                public void done(GoblinzDungeonWorld resource) {
+                    // System.out.println("loaded");
+                    resource.setIsLoaded(true);
+                    hasLoaded = true;
+                }
+            });
         }
 
         // displayManager.fontManager.addTextLayer("goblinz dungeon", 10, 10);
@@ -52,6 +55,9 @@ public class Gaming extends GameState {
             makeScreenDisappear();
 
         } else {
+
+            checkEnemies(d);
+
             calculateJump();
             checkCollisions(d);
             checkMovements();
@@ -59,6 +65,35 @@ public class Gaming extends GameState {
 
             Globals.getInstance().getHero().update(d);
         }
+    }
+
+    private void checkEnemies(float d) {
+        List<Enemy> enemies = Globals.getInstance().getWorld().getEnemies();
+
+        for (Enemy enemy : enemies) {
+            if (isInRange(enemy, Globals.getInstance().getHero())) {
+                enemy.attach();
+                enemy.updateAll();
+
+                // Dans update, on regarde le comportement et puis on affiche
+                enemy.update(d);
+            }
+        }
+    }
+
+    private boolean isInRange(Enemy enemy, Hero hero) {
+        boolean isInRange = false;
+        float enemyX = enemy.getX();
+        float heroX = hero.x;
+
+        int halfViewWidth = Globals.getInstance().getWorld().getHalfViewWidth();
+
+        if (((heroX + halfViewWidth) >= enemyX) && ((enemyX >= (heroX - halfViewWidth)))) {
+            isInRange = true;
+            //System.out.println("enemy in range");
+        }
+
+        return isInRange;
     }
 
     private void makeScreenDisappear() {

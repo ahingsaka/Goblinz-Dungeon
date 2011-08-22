@@ -3,8 +3,8 @@
 	"width": 212,
 	"height": 8,
 	"Enemies" : [
-		{"type": "goblin", "x": 5, "y": 6},
-		{"type": "goblin", "x": 7, "y": 6},
+		{"type": "goblin", "x": 196, "y": 6},
+		{"type": "goblin", "x": 197, "y": 6},
 	],
 	"Entities" : [
 		{"type": "rock", "x": 0, "y": 7},

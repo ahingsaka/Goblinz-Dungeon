@@ -15,7 +15,7 @@ import forplay.core.Image;
 /**
  * 
  * @author ahingsaka
- * @version 0.9.9
+ * @version 0.10.1
  */
 public class GoblinzDungeon implements Game {
 
@@ -41,6 +41,8 @@ public class GoblinzDungeon implements Game {
 
         Hero hero = new Hero(displayManager.getCharacterLayer(), 209, 2);
         Globals.getInstance().setHero(hero);
+        
+        Globals.getInstance().setCharacterLayer(displayManager.getCharacterLayer());
 
         // Load the states
         gameStateManager = new GameStateManager();
