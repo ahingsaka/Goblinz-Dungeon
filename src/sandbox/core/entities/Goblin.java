@@ -1,8 +1,11 @@
 package sandbox.core.entities;
 
 import static forplay.core.ForPlay.log;
+import sandbox.core.Globals;
 import sandbox.core.display.sprite.Sprite;
 import sandbox.core.display.sprite.SpriteLoader;
+import sandbox.core.world.Collision;
+import sandbox.core.world.GoblinzDungeonWorld;
 import forplay.core.GroupLayer;
 import forplay.core.Image;
 import forplay.core.ResourceCallback;
@@ -10,15 +13,19 @@ import forplay.core.ResourceCallback;
 public class Goblin extends Enemy {
 
     public static String TYPE = "goblin";
+    
+    private static final float STEP = (float) 0.05;
 
     public static String JSON_IMAGE = "sprites/goblin.json";
     private Sprite sprite;
 
     private GroupLayer layer;
-
+    
     public Goblin(final GroupLayer characterLayer, final int x, final int y) {
         this.x = x;
         this.y = y;
+        newX = x - STEP;
+        setMovingLeft(true);
         sprite = SpriteLoader.getSprite(JSON_IMAGE);
         sprite.addCallback(new ResourceCallback<Sprite>() {
             @Override
@@ -48,7 +55,146 @@ public class Goblin extends Enemy {
 
     @Override
     public void update(float delta) {
+        checkCollisions(delta);
+        checkMovements();
+    }
 
+    private void checkCollisions(float delta) {
+        boolean hasCollisionX = false;
+//        GoblinzDungeonWorld world = Globals.getInstance().getWorld();
+        
+        if (newX != x) {
+
+            // Check world bounds
+//            if ((newX < 0) || (newX >= world.worldWidth)) {
+//                newX = x;
+//                hasCollisionX = true;
+//            }
+
+            if (isMovingLeft()) {
+                hasCollisionX = collideLeft();
+                if (hasCollisionX) {
+                    setMovingLeft(false);
+                    setMovingRight(true);
+                }
+
+            } else if (isMovingRight()) {
+                hasCollisionX = collideRight();
+                if (hasCollisionX) {
+                    setMovingRight(false);
+                    setMovingLeft(true);
+                }
+            }
+            
+            if (!hasCollisionX) {
+                x = newX;
+            } else {
+                newX = x;
+            }
+
+        }
+        
+    }
+    
+    public boolean collideLeft() {
+
+        Collision collide = Collision.NONE;
+//        Hero hero = Globals.getInstance().getHero();
+        GoblinzDungeonWorld world = Globals.getInstance().getWorld();
+
+        if (newX != x) {
+            collide = world.tellIsCollidableObject(newX, y);
+
+            if (collide == Collision.BLOCK) {
+                return true;
+            }
+
+//            float absY = (int) y;
+//
+//            if (y > absY) {
+                collide = world.tellIsCollidableObject(newX, y + 1);
+//            }
+        }
+        
+        if (collide != Collision.BLOCK) {
+            return true;
+        } else {
+            return false;
+        }
+
+
+//        if (collide == Collision.NONE)
+//            return false;
+//        else if (collide == Collision.BLOCK)
+//            return true;
+//        else if (collide == Collision.HOLE) {
+//            //gameOver();
+//            return true;
+//        } else if (collide == Collision.END) {
+//            //isExitingLevel = true;
+//            return false;
+//        } else
+//            return false;
+    }
+    
+    public boolean collideRight() {
+
+        Collision collide = Collision.NONE;
+//        Hero hero = Globals.getInstance().getHero();
+        GoblinzDungeonWorld world = Globals.getInstance().getWorld();
+
+//        float newX = hero.newX;
+//        float x = hero.x;
+
+        if (newX != x) {
+            collide = world.tellIsCollidableObject(newX + 1, y);
+
+            if (collide == Collision.BLOCK) {
+                return true;
+            }
+
+//            float absY = (int) y;
+//
+//            if (y > absY) {
+                collide = world.tellIsCollidableObject(newX + 1, y + 1);
+//            }
+        }
+        
+        if (collide != Collision.BLOCK) {
+            return true;
+        } else {
+            return false;
+        }
+
+//        if (collide == Collision.NONE)
+//            return false;
+//        else if (collide == Collision.BLOCK)
+//            return true;
+//        else if (collide == Collision.HOLE) {
+//            //gameOver();
+//            return true;
+//        } else if (collide == Collision.END) {
+//            //isExitingLevel = true;
+//            return false;
+//        } else
+//            return false;
+
+    }
+
+    private void checkMovements() {
+        if (isMovingLeft()) {
+            moveLeft();
+        } else if (isMovingRight()) {
+            moveRight();
+        }
+    }
+
+    private void moveRight() {
+        newX = x + STEP;        
+    }
+
+    private void moveLeft() {
+        newX = x - STEP;
     }
 
     @Override
