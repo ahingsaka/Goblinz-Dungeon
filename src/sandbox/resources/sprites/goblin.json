@@ -1,12 +1,17 @@
 {
-	"urls": ["images/goblin_v4.png"],
+	"urls": ["images/goblin_v5.png"],
 	"sprites": [
 		{"id": "goblin_stand", "url":0, "x": 0, "y":0, "w":56, "h": 58},
 		
 		{"id": "goblin_walk_left0", "url": 0, "x": 0, "y": 58, "w": 56, "h": 58},
-    	{"id": "goblin_walk_left1", "url": 0, "x": 56, "y": 58, "w": 56, "h": 58}
+    	{"id": "goblin_walk_left1", "url": 0, "x": 56, "y": 58, "w": 56, "h": 58},
+    	
+    	{"id": "goblin_walk_right0", "url": 0, "x": 0, "y": 116, "w": 56, "h": 58},
+    	{"id": "goblin_walk_right1", "url": 0, "x": 56, "y": 116, "w": 56, "h": 58}
+    	
 	],
 	"animations": [
-		{"id": "goblin_walk_left", "looping": true, "frametime": 250, "sprite_ids": ["goblin_walk_left0", "goblin_walk_left1"]}
+		{"id": "goblin_walk_left", "looping": true, "frametime": 250, "sprite_ids": ["goblin_walk_left0", "goblin_walk_left1"]},
+		{"id": "goblin_walk_right", "looping": true, "frametime": 250, "sprite_ids": ["goblin_walk_right0", "goblin_walk_right1"]}
 	]
 }

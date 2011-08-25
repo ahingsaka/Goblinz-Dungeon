@@ -223,7 +223,7 @@ public class Goblin extends Enemy {
         
         if (isFacingRight()) {
             // FIXME
-            sprite.setCurrentAnimation("goblin_walk_left");
+            sprite.setCurrentAnimation("goblin_walk_right");
             sprite.getCurrentAnimation().start();
         } else {
             //sprite.setSprite("hero_right");
