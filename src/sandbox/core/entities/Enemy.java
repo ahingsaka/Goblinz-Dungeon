@@ -11,6 +11,26 @@ public abstract class Enemy extends WorldObject implements Updatable {
     
     private boolean isMovingRight = false;
     
+    public boolean isFacingLeft() {
+        return isFacingLeft;
+    }
+
+    public void setFacingLeft(boolean isFacingLeft) {
+        this.isFacingLeft = isFacingLeft;
+    }
+
+    public boolean isFacingRight() {
+        return isFacingRight;
+    }
+
+    public void setFacingRight(boolean isFacingRight) {
+        this.isFacingRight = isFacingRight;
+    }
+
+    private boolean isFacingLeft = false;
+    
+    private boolean isFacingRight = false;
+    
     public float newX;
     public float newY;
 
@@ -42,4 +62,6 @@ public abstract class Enemy extends WorldObject implements Updatable {
     public void setMovingRight(boolean isMovingRight) {
         this.isMovingRight = isMovingRight;
     }
+    
+    
 }

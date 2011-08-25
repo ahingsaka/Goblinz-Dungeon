@@ -2,6 +2,7 @@ package sandbox.core.entities;
 
 import static forplay.core.ForPlay.log;
 import sandbox.core.Globals;
+import sandbox.core.display.sprite.Animation;
 import sandbox.core.display.sprite.Sprite;
 import sandbox.core.display.sprite.SpriteLoader;
 import sandbox.core.world.Collision;
@@ -25,7 +26,10 @@ public class Goblin extends Enemy {
         this.x = x;
         this.y = y;
         newX = x - STEP;
+        
         setMovingLeft(true);
+        setFacingLeft(true);
+        
         sprite = SpriteLoader.getSprite(JSON_IMAGE);
         sprite.addCallback(new ResourceCallback<Sprite>() {
             @Override
@@ -57,6 +61,28 @@ public class Goblin extends Enemy {
     public void update(float delta) {
         checkCollisions(delta);
         checkMovements();
+        
+        Animation currentAnimation = sprite.getCurrentAnimation();
+
+        if (currentAnimation != null) {
+            currentAnimation.update(delta);
+            String currentFrameId = currentAnimation.getCurrentFrameId();
+
+            if (currentFrameId != null) {
+                sprite.setSprite(currentFrameId);
+            } else {
+                sprite.setCurrentAnimation(null);
+
+                if (isFacingLeft() && !isMovingLeft()) {
+                    //sprite.setSprite("hero_left");
+                } else if (isFacingRight() && !isMovingRight()) {
+                    //sprite.setSprite("hero_right");
+                }
+
+            }
+        }
+        
+        
     }
 
     private void checkCollisions(float delta) {
@@ -190,11 +216,39 @@ public class Goblin extends Enemy {
     }
 
     private void moveRight() {
-        newX = x + STEP;        
+        newX = x + STEP;      
+        
+        setMovingRight(true);
+        setMovingLeft(false);
+        
+        if (isFacingRight()) {
+            // FIXME
+            sprite.setCurrentAnimation("goblin_walk_left");
+            sprite.getCurrentAnimation().start();
+        } else {
+            //sprite.setSprite("hero_right");
+        }
+        
+        setFacingRight(true);
+        setFacingLeft(false);
     }
 
     private void moveLeft() {
         newX = x - STEP;
+        
+        setMovingRight(false);
+        setMovingLeft(true);
+
+            if (isFacingLeft()) {
+                sprite.setCurrentAnimation("goblin_walk_left");
+                sprite.getCurrentAnimation().start();
+            } else {
+                //sprite.setSprite("hero_right");
+            }
+
+        setFacingRight(false);
+        setFacingLeft(true);
+        
     }
 
     @Override
