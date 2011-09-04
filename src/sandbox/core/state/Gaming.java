@@ -225,7 +225,7 @@ public class Gaming extends GameState {
             }
 
             float absX = (int) hero.x;
-
+            
             if (hero.x > absX) {
                 collide = world.tellIsCollidableObject(hero.x + 1, newY);
             }
@@ -364,6 +364,7 @@ public class Gaming extends GameState {
                 hasCollisionY = collideDown();
                 if (hasCollisionY) {
                     hero.isMovingDown = false;
+                    hero.isFalling = false;
                 }
             } else if (hero.isMovingUp) {
                 hasCollisionY = collideUp();
@@ -384,9 +385,7 @@ public class Gaming extends GameState {
         if (!hasCollisionY) {
             hero.y = hero.newY;
         } else {
-            // System.out.println("collision");
             hero.newY = hero.y;
-            hero.isFalling = false;
             hero.setFallingLeft(false);
             hero.setFallingRight(false);
         }
