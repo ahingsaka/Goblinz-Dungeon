@@ -19,7 +19,7 @@ public class Hero extends WorldObject implements Updatable {
     private Sprite sprite;
 
     public float alpha;
-    
+
     public boolean isIdle;
 
     public boolean isFacingLeft;
@@ -43,7 +43,7 @@ public class Hero extends WorldObject implements Updatable {
     public float y = 6;
 
     public boolean isFalling;
-    
+
     private boolean isFallingRight;
     private boolean isFallingLeft;
 
@@ -119,8 +119,8 @@ public class Hero extends WorldObject implements Updatable {
 
     public void moveLeft() {
         newX = x - STEP;
-        
-        System.out.println(newX);
+
+        // System.out.println(newX);
         isMovingRight = false;
         isMovingLeft = true;
 
@@ -129,7 +129,7 @@ public class Hero extends WorldObject implements Updatable {
                 sprite.setCurrentAnimation("hero_walk_left");
                 sprite.getCurrentAnimation().start();
             } else {
-                //sprite.setSprite("hero_right");
+                // sprite.setSprite("hero_right");
             }
         }
 
@@ -148,7 +148,7 @@ public class Hero extends WorldObject implements Updatable {
 
     public void moveRight() {
         newX = x + STEP;
-        System.out.println(newX);
+        // System.out.println(newX);
         isMovingRight = true;
         isMovingLeft = false;
 
@@ -157,7 +157,7 @@ public class Hero extends WorldObject implements Updatable {
                 sprite.setCurrentAnimation("hero_walk_right");
                 sprite.getCurrentAnimation().start();
             } else {
-                //sprite.setSprite("hero_right");
+                // sprite.setSprite("hero_right");
             }
         }
 
@@ -184,8 +184,8 @@ public class Hero extends WorldObject implements Updatable {
     public void upLeft() {
         isMovingLeft = false;
         // FIXME is there a forplay bug ?
-//      sprite.setCurrentAnimation(null);
-//      sprite.setSprite("hero_left");
+        // sprite.setCurrentAnimation(null);
+        // sprite.setSprite("hero_left");
     }
 
     public void upUp() {
@@ -195,8 +195,8 @@ public class Hero extends WorldObject implements Updatable {
     public void upRight() {
         isMovingRight = false;
         // FIXME is there a forplay bug ?
-//        sprite.setCurrentAnimation(null);
-//        sprite.setSprite("hero_right");
+        // sprite.setCurrentAnimation(null);
+        // sprite.setSprite("hero_right");
     }
 
     public void upDown() {
@@ -210,14 +210,14 @@ public class Hero extends WorldObject implements Updatable {
                 isJumpingRight = true;
                 sprite.setCurrentAnimation(null);
                 sprite.setSprite("hero_jump_move_right");
-                
+
             } else if (isMovingLeft) {
                 isJumpingLeft = true;
                 sprite.setCurrentAnimation(null);
                 sprite.setSprite("hero_jump_move_left");
-                
+
             } else {
-                
+
                 // jump straight
                 if (isFacingLeft) {
                     sprite.setCurrentAnimation(null);
@@ -279,15 +279,24 @@ public class Hero extends WorldObject implements Updatable {
                 sprite.setSprite(currentFrameId);
             } else {
                 sprite.setCurrentAnimation(null);
+            }
+        }
 
-                if (isFacingLeft && !isMovingLeft) {
-                    //sprite.setSprite("hero_left");
-                } else if (isFacingRight && !isMovingRight) {
-                    //sprite.setSprite("hero_right");
-                }
+        // FIXME not very pretty ...
+        // but keyUp() is problematic
+        if ((!isMovingLeft) && (!isMovingRight) && (!isJumpingLeft) && (!isJumpingRight) && (!isFallingLeft)
+                && (!isFallingRight)) {
+            if (isFacingLeft) {
+                sprite.setCurrentAnimation(null);
+                sprite.setSprite("hero_left");
+
+            } else if (isFacingRight) {
+                sprite.setCurrentAnimation(null);
+                sprite.setSprite("hero_right");
 
             }
         }
+
     }
 
 }

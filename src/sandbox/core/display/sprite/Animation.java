@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Animation {
 
+    private String id;
     private float frameTime;
     private boolean looping;
 
@@ -18,7 +19,7 @@ public class Animation {
 
     private List<String> spriteIds;
 
-    public Animation(int frameTime, boolean looping, List<String> spriteIds) {
+    public Animation(String id, int frameTime, boolean looping, List<String> spriteIds) {
         this.frameTime = frameTime;
         this.looping = looping;
         this.spriteIds = spriteIds;
@@ -93,6 +94,10 @@ public class Animation {
             this.hasBegun = false;
         }
         
+    }
+    
+    public String getId() {
+        return id;
     }
 
 }

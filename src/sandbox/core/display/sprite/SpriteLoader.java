@@ -228,7 +228,7 @@ public class SpriteLoader {
                     ids.add(animationSpriteId);
                 }
                 
-                Animation spriteAnimation = new Animation(frameTime, looping, ids);
+                Animation spriteAnimation = new Animation(id, frameTime, looping, ids);
                 
                 sprite.getAnimations().put(id, spriteAnimation);
             }

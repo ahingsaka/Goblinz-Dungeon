@@ -90,7 +90,7 @@ public class Gaming extends GameState {
 
         if (((heroX + halfViewWidth) >= enemyX) && ((enemyX >= (heroX - halfViewWidth)))) {
             isInRange = true;
-            //System.out.println("enemy in range");
+            // System.out.println("enemy in range");
         }
 
         return isInRange;
@@ -456,11 +456,12 @@ public class Gaming extends GameState {
 
         switch (keyCode) {
         case Keyboard.KEY_LEFT:
+//            System.out.println("isReleasedLeft");
             Globals.getInstance().getHero().upLeft();
             break;
         case Keyboard.KEY_RIGHT:
             // FIXME is there a forplay bug ?
-            System.out.println("isReleased");
+//            System.out.println("isReleasedRight");
             Globals.getInstance().getHero().upRight();
             break;
         case Keyboard.KEY_DOWN:

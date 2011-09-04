@@ -55,8 +55,6 @@ public abstract class GameState implements Keyboard.Listener, Pointer.Listener {
 
     @Override
     public void onKeyUp(int keyCode) {
-        // TODO Auto-generated method stub
-
     }
 
 }
