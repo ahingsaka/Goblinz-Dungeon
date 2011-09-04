@@ -30,7 +30,7 @@ public class Hero extends WorldObject implements Updatable {
     public boolean isMovingUp;
     public boolean isMovingDown;
 
-    public boolean isJumping;
+    private boolean isJumping;
     public boolean isJumpingRight;
     public boolean isJumpingLeft;
 
@@ -230,7 +230,7 @@ public class Hero extends WorldObject implements Updatable {
                 }
             }
 
-            isJumping = true;
+            setJumping(true);
             speed = JUMP;
 
         }
@@ -270,6 +270,15 @@ public class Hero extends WorldObject implements Updatable {
         this.alpha = alpha;
         sprite.layer().setAlpha(alpha);
     }
+    
+    public void setJumping(boolean isJumping) {
+        this.isJumping = isJumping;
+        this.isMovingUp = isJumping;
+    }
+    
+    public boolean isJumping() {
+        return isJumping;
+    }
 
     @Override
     public void update(float delta) {
@@ -303,6 +312,23 @@ public class Hero extends WorldObject implements Updatable {
             }
         }
 
+    }
+
+    public void makeFall() {
+        setJumping(false);
+
+        if (isJumpingRight) {
+            setFallingRight(true);
+            isJumpingRight = false;
+        } else if (isJumpingLeft) {
+            setFallingLeft(true);
+            isJumpingLeft = false;
+        }
+
+        isFalling = true;
+        isMovingDown = true;
+        speed = Hero.JUMP;
+        
     }
 
 }

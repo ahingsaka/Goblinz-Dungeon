@@ -85,7 +85,7 @@ public class GameOver extends GameState {
                 hero.isFalling = false;
                 hero.setFallingLeft(false);
                 hero.setFallingRight(false);
-                hero.isJumping = false;
+                hero.setJumping(false);
                 hero.isJumpingLeft = false;
                 hero.isJumpingRight = false;
                 hero.isMovingDown = false;
