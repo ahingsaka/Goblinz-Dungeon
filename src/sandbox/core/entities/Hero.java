@@ -34,6 +34,8 @@ public class Hero extends WorldObject implements Updatable {
     public boolean isJumpingRight;
     public boolean isJumpingLeft;
 
+    public boolean isSlicing;
+
     public int speed;
 
     public float newX = 0;
@@ -235,6 +237,8 @@ public class Hero extends WorldObject implements Updatable {
     }
 
     public void sword() {
+        isSlicing = true;
+        
         if (isFacingRight) {
             sprite.setCurrentAnimation("hero_sword_right");
         } else if (isFacingLeft) {
@@ -279,13 +283,15 @@ public class Hero extends WorldObject implements Updatable {
                 sprite.setSprite(currentFrameId);
             } else {
                 sprite.setCurrentAnimation(null);
+
+                isSlicing = false;
             }
         }
 
         // FIXME not very pretty ...
         // but keyUp() is problematic
         if ((!isMovingLeft) && (!isMovingRight) && (!isJumpingLeft) && (!isJumpingRight) && (!isFallingLeft)
-                && (!isFallingRight)) {
+                && (!isFallingRight) && (!isSlicing)) {
             if (isFacingLeft) {
                 sprite.setCurrentAnimation(null);
                 sprite.setSprite("hero_left");
