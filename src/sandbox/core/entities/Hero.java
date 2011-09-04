@@ -270,12 +270,12 @@ public class Hero extends WorldObject implements Updatable {
         this.alpha = alpha;
         sprite.layer().setAlpha(alpha);
     }
-    
+
     public void setJumping(boolean isJumping) {
         this.isJumping = isJumping;
         this.isMovingUp = isJumping;
     }
-    
+
     public boolean isJumping() {
         return isJumping;
     }
@@ -300,7 +300,7 @@ public class Hero extends WorldObject implements Updatable {
         // FIXME not very pretty ...
         // but keyUp() is problematic
         if ((!isMovingLeft) && (!isMovingRight) && (!isJumpingLeft) && (!isJumping) && (!isJumpingRight)
-                && (!isFallingLeft) && (!isFallingRight) && (!isSlicing)) {
+                && (!isFallingLeft) && (!isFallingRight) && (!isSlicing) && (!isFalling)) {
             if (isFacingLeft) {
                 sprite.setCurrentAnimation(null);
                 sprite.setSprite("hero_left");
@@ -325,10 +325,18 @@ public class Hero extends WorldObject implements Updatable {
             isJumpingLeft = false;
         }
 
+        if (isFacingLeft) {
+            sprite.setCurrentAnimation(null);
+            sprite.setSprite("hero_jump_left1");
+        } else if (isFacingRight) {
+            sprite.setCurrentAnimation(null);
+            sprite.setSprite("hero_jump_right1");
+        }
+
         isFalling = true;
         isMovingDown = true;
         speed = Hero.JUMP;
-        
+
     }
 
 }
