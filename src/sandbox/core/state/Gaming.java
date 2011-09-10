@@ -7,6 +7,7 @@ import sandbox.core.entities.Enemy;
 import sandbox.core.entities.Hero;
 import sandbox.core.fsm.GameState;
 import sandbox.core.world.Collision;
+import sandbox.core.world.CollisionUtils;
 import sandbox.core.world.GoblinzDungeonWorld;
 import sandbox.core.world.WorldLoader;
 import forplay.core.ForPlay;
@@ -69,14 +70,20 @@ public class Gaming extends GameState {
 
     private void checkEnemies(float d) {
         List<Enemy> enemies = Globals.getInstance().getWorld().getEnemies();
+        Hero hero = Globals.getInstance().getHero();
 
         for (Enemy enemy : enemies) {
-            if (isInRange(enemy, Globals.getInstance().getHero())) {
+            if (isInRange(enemy, hero)) {
                 enemy.attach();
                 enemy.updateAll();
 
                 // Dans update, on regarde le comportement et puis on affiche
                 enemy.update(d);
+
+                boolean collisionWithEnemyFound = CollisionUtils.checkCollision(enemy, hero);
+                if (collisionWithEnemyFound) {
+                    hero.collideWithEnemy();
+                }
             }
         }
     }
@@ -225,7 +232,7 @@ public class Gaming extends GameState {
             }
 
             float absX = (int) hero.x;
-            
+
             if (hero.x > absX) {
                 collide = world.tellIsCollidableObject(hero.x + 1, newY);
             }
@@ -443,12 +450,12 @@ public class Gaming extends GameState {
 
         switch (keyCode) {
         case Keyboard.KEY_LEFT:
-//            System.out.println("isReleasedLeft");
+            // System.out.println("isReleasedLeft");
             Globals.getInstance().getHero().upLeft();
             break;
         case Keyboard.KEY_RIGHT:
             // FIXME is there a forplay bug ?
-//            System.out.println("isReleasedRight");
+            // System.out.println("isReleasedRight");
             Globals.getInstance().getHero().upRight();
             break;
         case Keyboard.KEY_DOWN:

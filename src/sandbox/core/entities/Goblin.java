@@ -19,7 +19,7 @@ public class Goblin extends Enemy {
 
     public static String JSON_IMAGE = "sprites/goblin.json";
     private Sprite sprite;
-
+    
     private GroupLayer layer;
     
     public Goblin(final GroupLayer characterLayer, final int x, final int y) {

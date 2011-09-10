@@ -4,13 +4,19 @@ import sandbox.core.display.sprite.Updatable;
 import sandbox.core.world.WorldObject;
 
 public abstract class Enemy extends WorldObject implements Updatable {
-    
+
     public boolean isAttached = false;
 
     private boolean isMovingLeft = false;
-    
+
     private boolean isMovingRight = false;
-    
+
+    private int width = 56;
+
+    public int getWidth() {
+        return width;
+    }
+
     public boolean isFacingLeft() {
         return isFacingLeft;
     }
@@ -28,9 +34,9 @@ public abstract class Enemy extends WorldObject implements Updatable {
     }
 
     private boolean isFacingLeft = false;
-    
+
     private boolean isFacingRight = false;
-    
+
     public float newX;
     public float newY;
 
@@ -40,17 +46,17 @@ public abstract class Enemy extends WorldObject implements Updatable {
     public abstract void updateAll();
 
     public abstract void attach();
-    
+
     public abstract void setPosition(int x, int y);
-    
+
     public boolean isAttached() {
         return isAttached;
     }
-    
+
     public boolean isMovingLeft() {
         return isMovingLeft;
     }
-    
+
     public boolean isMovingRight() {
         return isMovingRight;
     }
@@ -58,10 +64,9 @@ public abstract class Enemy extends WorldObject implements Updatable {
     public void setMovingLeft(boolean isMovingLeft) {
         this.isMovingLeft = isMovingLeft;
     }
-    
+
     public void setMovingRight(boolean isMovingRight) {
         this.isMovingRight = isMovingRight;
     }
-    
-    
+
 }

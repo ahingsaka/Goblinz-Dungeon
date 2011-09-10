@@ -12,8 +12,9 @@ import forplay.core.ResourceCallback;
 
 public class Hero extends WorldObject implements Updatable {
 
+    private static final int BLINKING_TIME = 2000;
     public static String TYPE = "hero";
-    private static final float STEP = (float) 0.1;
+    public static final float STEP = (float) 0.1;
     public static final int JUMP = 20;
     public static String JSON_IMAGE = "sprites/hero.json";
     private Sprite sprite;
@@ -35,6 +36,9 @@ public class Hero extends WorldObject implements Updatable {
     public boolean isJumpingLeft;
 
     public boolean isSlicing;
+    
+    public boolean isBlinking;
+    private int blinkingTime;
 
     public int speed;
 
@@ -43,6 +47,12 @@ public class Hero extends WorldObject implements Updatable {
 
     public float x = 0;
     public float y = 6;
+    
+    private int width = 56;
+    
+    public int getWidth() {
+        return width;
+    }
 
     public boolean isFalling;
 
@@ -282,6 +292,12 @@ public class Hero extends WorldObject implements Updatable {
 
     @Override
     public void update(float delta) {
+
+        // Blink player
+        if (isBlinking) {
+            blink(delta);
+        }
+        
         Animation currentAnimation = sprite.getCurrentAnimation();
 
         if (currentAnimation != null) {
@@ -314,6 +330,22 @@ public class Hero extends WorldObject implements Updatable {
 
     }
 
+    private void blink(float delta) {
+        blinkingTime -= delta;
+        
+        if (blinkingTime <= 0) {
+            isBlinking = false;
+            setAlpha(1);
+            
+        } else {
+            if (alpha == 0) {
+                setAlpha(1);
+            } else {
+                setAlpha(0);
+            }
+        }
+    }
+
     public void makeFall() {
         setJumping(false);
 
@@ -337,6 +369,13 @@ public class Hero extends WorldObject implements Updatable {
         isMovingDown = true;
         speed = Hero.JUMP;
 
+    }
+
+    public void collideWithEnemy() {
+        if (isBlinking != true) {
+            blinkingTime = BLINKING_TIME;
+            isBlinking = true;
+        }
     }
 
 }
