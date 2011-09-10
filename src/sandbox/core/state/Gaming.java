@@ -1,9 +1,11 @@
 package sandbox.core.state;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import sandbox.core.Globals;
 import sandbox.core.entities.Enemy;
+import sandbox.core.entities.Heart;
 import sandbox.core.entities.Hero;
 import sandbox.core.fsm.GameState;
 import sandbox.core.world.Collision;
@@ -21,6 +23,8 @@ public class Gaming extends GameState {
     public boolean hasLoaded = false;
 
     private boolean isExitingLevel = false;
+
+    private List<Heart> hearts = new ArrayList<Heart>();
 
     public Gaming() {
         name = NAME;
@@ -47,12 +51,25 @@ public class Gaming extends GameState {
             });
         }
 
+        if (hearts.isEmpty()) {
+            Heart heart1 = new Heart(displayManager.getTextLayer(), 25, 25);
+            Heart heart2 = new Heart(displayManager.getTextLayer(), 65, 25);
+            Heart heart3 = new Heart(displayManager.getTextLayer(), 105, 25);
+            
+            hearts.add(heart1);
+            hearts.add(heart2);
+            hearts.add(heart3);
+        }
+
         // displayManager.fontManager.addTextLayer("goblinz dungeon", 10, 10);
     }
 
     @Override
     protected void update(float d) {
-        if (isExitingLevel) {
+        if (Globals.getInstance().getHero().isDying()) {
+            gameOver();
+
+        } else if (isExitingLevel) {
             makeScreenDisappear();
 
         } else {
@@ -82,6 +99,12 @@ public class Gaming extends GameState {
 
                 boolean collisionWithEnemyFound = CollisionUtils.checkCollision(enemy, hero);
                 if (collisionWithEnemyFound) {
+                    
+                    // -_-'
+                    if (!hero.isBlinking) {
+                        removeHeart();
+                    }
+                    
                     hero.collideWithEnemy();
                 }
             }
@@ -463,6 +486,21 @@ public class Gaming extends GameState {
             break;
         }
 
+    }
+    
+    private void removeHeart() {
+        int i = hearts.size() - 1;
+
+        while (i >= 0) {
+            Heart heart = hearts.get(i);
+            if (heart.isEmpty()) {
+                i -= 1;
+            } else {
+                heart.delete();
+                break;
+            }
+        }
+        
     }
 
 }

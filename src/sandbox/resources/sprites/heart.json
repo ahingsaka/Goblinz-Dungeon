@@ -1,0 +1,7 @@
+{
+	"urls": ["images/hearts.png"],
+	"sprites": [
+		{"id": "full", "url":0, "x": 0, "y":0, "w":34, "h": 34},
+    	{"id": "empty", "url": 0, "x": 34, "y": 0, "w": 34, "h": 34}
+	]
+}

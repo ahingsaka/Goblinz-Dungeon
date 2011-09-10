@@ -93,7 +93,8 @@ public class GameOver extends GameState {
                 hero.isMovingUp = false;
                 hero.isFacingLeft = false;
                 hero.isFacingRight = true;
-                
+                hero.setDying(false);
+                hero.setHearts(3);
                 endState = Intro.NAME;
             }
             break;

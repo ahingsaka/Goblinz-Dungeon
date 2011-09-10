@@ -12,12 +12,15 @@ import forplay.core.ResourceCallback;
 
 public class Hero extends WorldObject implements Updatable {
 
-    private static final int BLINKING_TIME = 2000;
     public static String TYPE = "hero";
+
     public static final float STEP = (float) 0.1;
     public static final int JUMP = 20;
     public static String JSON_IMAGE = "sprites/hero.json";
     private Sprite sprite;
+
+    private static final int BLINKING_TIME = 2000;
+    private int hearts = 3;
 
     public float alpha;
 
@@ -36,9 +39,11 @@ public class Hero extends WorldObject implements Updatable {
     public boolean isJumpingLeft;
 
     public boolean isSlicing;
-    
+
     public boolean isBlinking;
     private int blinkingTime;
+    
+    private boolean isDying;
 
     public int speed;
 
@@ -47,9 +52,9 @@ public class Hero extends WorldObject implements Updatable {
 
     public float x = 0;
     public float y = 6;
-    
+
     private int width = 56;
-    
+
     public int getWidth() {
         return width;
     }
@@ -297,7 +302,7 @@ public class Hero extends WorldObject implements Updatable {
         if (isBlinking) {
             blink(delta);
         }
-        
+
         Animation currentAnimation = sprite.getCurrentAnimation();
 
         if (currentAnimation != null) {
@@ -332,11 +337,11 @@ public class Hero extends WorldObject implements Updatable {
 
     private void blink(float delta) {
         blinkingTime -= delta;
-        
+
         if (blinkingTime <= 0) {
             isBlinking = false;
             setAlpha(1);
-            
+
         } else {
             if (alpha == 0) {
                 setAlpha(1);
@@ -373,9 +378,27 @@ public class Hero extends WorldObject implements Updatable {
 
     public void collideWithEnemy() {
         if (isBlinking != true) {
-            blinkingTime = BLINKING_TIME;
-            isBlinking = true;
+            hearts -= 1;
+
+            if (hearts == 0) {
+                isDying = true;
+            } else {
+                blinkingTime = BLINKING_TIME;
+                isBlinking = true;
+            }
         }
+    }
+    
+    public void setDying(boolean isDying) {
+        this.isDying = isDying;
+    }
+    
+    public void setHearts(int hearts) {
+        this.hearts = hearts;
+    }
+    
+    public boolean isDying() {
+        return isDying;
     }
 
 }
