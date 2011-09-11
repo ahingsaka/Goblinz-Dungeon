@@ -15,7 +15,7 @@ import forplay.core.Image;
 /**
  * 
  * @author ahingsaka
- * @version 0.11.4
+ * @version 0.11.5
  */
 public class GoblinzDungeon implements Game {
 

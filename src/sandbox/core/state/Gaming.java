@@ -24,7 +24,7 @@ public class Gaming extends GameState {
 
     private boolean isExitingLevel = false;
 
-    private List<Heart> hearts = new ArrayList<Heart>();
+    private List<Heart> hearts;
 
     public Gaming() {
         name = NAME;
@@ -51,15 +51,14 @@ public class Gaming extends GameState {
             });
         }
 
-        if (hearts.isEmpty()) {
-            Heart heart1 = new Heart(displayManager.getTextLayer(), 25, 25);
-            Heart heart2 = new Heart(displayManager.getTextLayer(), 65, 25);
-            Heart heart3 = new Heart(displayManager.getTextLayer(), 105, 25);
-            
-            hearts.add(heart1);
-            hearts.add(heart2);
-            hearts.add(heart3);
-        }
+        hearts = new ArrayList<Heart>();
+        Heart heart1 = new Heart(displayManager.getTextLayer(), 25, 25);
+        Heart heart2 = new Heart(displayManager.getTextLayer(), 65, 25);
+        Heart heart3 = new Heart(displayManager.getTextLayer(), 105, 25);
+
+        hearts.add(heart1);
+        hearts.add(heart2);
+        hearts.add(heart3);
 
         // displayManager.fontManager.addTextLayer("goblinz dungeon", 10, 10);
     }
@@ -99,12 +98,12 @@ public class Gaming extends GameState {
 
                 boolean collisionWithEnemyFound = CollisionUtils.checkCollision(enemy, hero);
                 if (collisionWithEnemyFound) {
-                    
+
                     // -_-'
                     if (!hero.isBlinking) {
                         removeHeart();
                     }
-                    
+
                     hero.collideWithEnemy();
                 }
             }
@@ -487,7 +486,7 @@ public class Gaming extends GameState {
         }
 
     }
-    
+
     private void removeHeart() {
         int i = hearts.size() - 1;
 
@@ -500,7 +499,7 @@ public class Gaming extends GameState {
                 break;
             }
         }
-        
+
     }
 
 }
