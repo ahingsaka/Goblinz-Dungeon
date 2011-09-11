@@ -42,7 +42,7 @@ public class Hero extends WorldObject implements Updatable {
 
     public boolean isBlinking;
     private int blinkingTime;
-    
+
     private boolean isDying;
 
     public int speed;
@@ -279,6 +279,26 @@ public class Hero extends WorldObject implements Updatable {
     public void reset() {
         sprite.setSprite(0);
         setAlpha(1);
+
+        newX = 209;
+        newY = 2;
+        x = 209;
+        y = 2;
+        setPosition(209, 2);
+        isFalling = false;
+        setFallingLeft(false);
+        setFallingRight(false);
+        setJumping(false);
+        isJumpingLeft = false;
+        isJumpingRight = false;
+        isMovingDown = false;
+        isMovingLeft = false;
+        isMovingUp = false;
+        isFacingLeft = false;
+        isFacingRight = true;
+        setDying(false);
+        setHearts(3);
+
     }
 
     public void setAlpha(float alpha) {
@@ -388,15 +408,15 @@ public class Hero extends WorldObject implements Updatable {
             }
         }
     }
-    
+
     public void setDying(boolean isDying) {
         this.isDying = isDying;
     }
-    
+
     public void setHearts(int hearts) {
         this.hearts = hearts;
     }
-    
+
     public boolean isDying() {
         return isDying;
     }
