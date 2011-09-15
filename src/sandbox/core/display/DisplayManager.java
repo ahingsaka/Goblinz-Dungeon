@@ -56,8 +56,8 @@ public class DisplayManager {
 
     public void init() {
         graphics().rootLayer().add(backgroundLayer);
-        graphics().rootLayer().add(characterLayer);
         graphics().rootLayer().add(gameLayer);
+        graphics().rootLayer().add(characterLayer);
         graphics().rootLayer().add(textLayer);
     }
 

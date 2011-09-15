@@ -18,11 +18,17 @@ public class CollisionUtils {
         if (((enemy.getX() + width) >= hero.x) && (enemy.getX() <= (hero.x + width))) {
             if ((enemy.getY() + width >= hero.y) && (enemy.getY() <= (hero.x + width))) {
                 result = true;
-//                System.out.println("collide");
             }
         }
         
         return result;
+    }
+
+    public static boolean checkCollisionWithSword(Enemy enemy, Hero hero) {
+        
+        
+        
+        return false;
     }
 
 }

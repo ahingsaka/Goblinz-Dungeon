@@ -69,4 +69,6 @@ public abstract class Enemy extends WorldObject implements Updatable {
         this.isMovingRight = isMovingRight;
     }
 
+    public abstract void dies();
+
 }

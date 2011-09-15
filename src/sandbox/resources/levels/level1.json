@@ -732,9 +732,18 @@
 		{"type": "door", "x": 210, "y": 1},
 		{"type": "invisiblerock", "x": 210, "y": 3},
 		
+		{"type": "invisiblerock", "x": 210, "y": 0},
+		{"type": "invisiblerock", "x": 210, "y": 4},
+		{"type": "invisiblerock", "x": 210, "y": 5},
+		{"type": "invisiblerock", "x": 210, "y": 6},
+		
+		{"type": "invisiblerock", "x": 211, "y": 4},
+		{"type": "invisiblerock", "x": 211, "y": 5},
+		{"type": "invisiblerock", "x": 211, "y": 6},
 		{"type": "invisiblerock", "x": 211, "y": 3},
 		{"type": "invisiblerock", "x": 211, "y": 2},
-		{"type": "invisiblerock", "x": 211, "y": 1}
+		{"type": "invisiblerock", "x": 211, "y": 1},
+		{"type": "invisiblerock", "x": 211, "y": 0}
 		
 	]
 }

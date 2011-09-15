@@ -65,7 +65,8 @@ public class Gaming extends GameState {
 
     @Override
     protected void update(float d) {
-        if (Globals.getInstance().getHero().isDying()) {
+        Hero hero = Globals.getInstance().getHero();
+        if (hero.isDying()) {
             gameOver();
 
         } else if (isExitingLevel) {
@@ -80,7 +81,21 @@ public class Gaming extends GameState {
             checkMovements();
             gravityCheck();
 
-            Globals.getInstance().getHero().update(d);
+            hero.update(d);
+
+            if (hero.isSlicingFull()) {
+                List<Enemy> enemies = Globals.getInstance().getWorld().getEnemies();
+                for (Enemy enemy : enemies) {
+                    if (isInRange(enemy, hero)) {
+                        boolean collisionWithEnemyFound = CollisionUtils.checkCollisionWithSword(enemy, hero);
+                        if (collisionWithEnemyFound) {
+                            enemy.dies();
+                        }
+                    }
+                }
+
+            }
+
         }
     }
 

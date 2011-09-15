@@ -67,7 +67,7 @@ public class Animation {
         }
 
         if (!looping) {
-            System.out.println(frameIndex);
+            //System.out.println(frameIndex);
             if (frameIndex == spriteIds.size() - 1) {
                 hasFinished = true;
                 hasBegun = false;
@@ -75,6 +75,10 @@ public class Animation {
         }
 
         return spriteIds.get(frameIndex);
+    }
+    
+    public int getFrameIndex() {
+        return frameIndex;
     }
 
     public void start() {

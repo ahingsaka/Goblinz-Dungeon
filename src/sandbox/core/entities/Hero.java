@@ -44,6 +44,8 @@ public class Hero extends WorldObject implements Updatable {
     private int blinkingTime;
 
     private boolean isDying;
+    
+    private boolean isSlicingFull;
 
     public int speed;
 
@@ -331,10 +333,18 @@ public class Hero extends WorldObject implements Updatable {
 
             if (currentFrameId != null) {
                 sprite.setSprite(currentFrameId);
+                
+                // FIXME is there a way to handle correctly the strike ?
+                if (isSlicing && currentAnimation.getFrameIndex() == 1) {
+                    isSlicingFull = true;
+                } else if (isSlicing) {
+                    isSlicingFull = false;
+                }
+                
             } else {
                 sprite.setCurrentAnimation(null);
-
                 isSlicing = false;
+                isSlicingFull = false;
             }
         }
 
@@ -353,6 +363,10 @@ public class Hero extends WorldObject implements Updatable {
             }
         }
 
+    }
+    
+    public boolean isSlicingFull() {
+        return isSlicingFull;
     }
 
     private void blink(float delta) {

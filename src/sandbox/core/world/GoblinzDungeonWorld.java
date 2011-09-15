@@ -185,5 +185,9 @@ public class GoblinzDungeonWorld {
     public int getHalfViewWidth() {
         return halfViewWidth;
     }
+    
+    public WorldObject[] getWorld() {
+        return world;
+    }
 
 }

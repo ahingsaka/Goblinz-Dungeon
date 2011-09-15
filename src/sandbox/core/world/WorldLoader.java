@@ -3,6 +3,7 @@ package sandbox.core.world;
 import sandbox.core.entities.Enemy;
 import sandbox.core.entities.Goblin;
 import sandbox.core.entities.statik.Door;
+import sandbox.core.entities.statik.Wall;
 import sandbox.core.entities.statik.rock.InvisibleRock;
 import sandbox.core.entities.statik.rock.Rock;
 import sandbox.core.entities.statik.rock.RockLeft;
@@ -35,6 +36,8 @@ public class WorldLoader {
                 Rock rock = new Rock();
                 Door door = new Door();
                 InvisibleRock invisibleRock = new InvisibleRock();
+                
+                Wall wall = new Wall();
 
                 AssetWatcher assetWatcher = new AssetWatcher(new AssetWatcher.Listener() {
 
@@ -89,7 +92,15 @@ public class WorldLoader {
                     }
 
                 }
-
+                
+                // Fill empty squares with walls
+                WorldObject[] world = goblinzDungeonWorld.getWorld();
+                for (int i = 0; i < world.length; i++) {
+                    if (world[i] == null) {
+                        world[i] = wall;
+                    }
+                }
+                
                 // Create the array of enemies
                 Array enemiesArray = document.getArray("Enemies");
                 for (int i = 0; i < enemiesArray.length(); i++) {
