@@ -25,10 +25,16 @@ public class CollisionUtils {
     }
 
     public static boolean checkCollisionWithSword(Enemy enemy, Hero hero) {
+        boolean result = false;
+        int width = 2;
         
+        if (((enemy.getX() + width) >= hero.x) && (enemy.getX() <= (hero.x + width))) {
+            if ((enemy.getY() + width >= hero.y) && (enemy.getY() <= (hero.x + width))) {
+                result = true;
+            }
+        }
         
-        
-        return false;
+        return result;
     }
 
 }

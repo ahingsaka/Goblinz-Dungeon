@@ -10,6 +10,10 @@ public abstract class Enemy extends WorldObject implements Updatable {
     private boolean isMovingLeft = false;
 
     private boolean isMovingRight = false;
+    
+    private boolean isDead = false;
+    
+    private boolean isDying = false;
 
     private int width = 56;
 
@@ -68,7 +72,28 @@ public abstract class Enemy extends WorldObject implements Updatable {
     public void setMovingRight(boolean isMovingRight) {
         this.isMovingRight = isMovingRight;
     }
+    
+    public boolean isDead() {
+        return isDead;
+    }
+    
+    public boolean isDying() {
+        return isDying;
+    }
+    
+    public void setDying(boolean isDying) {
+        this.isDying = isDying;
+    }
+    
+    public void setDead(boolean isDead) {
+        this.isDead = isDead;
+    }
 
     public abstract void dies();
+
+    public void reset() {
+        isDying = false;
+        isDead = false;
+    }
 
 }

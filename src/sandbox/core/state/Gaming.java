@@ -104,22 +104,25 @@ public class Gaming extends GameState {
         Hero hero = Globals.getInstance().getHero();
 
         for (Enemy enemy : enemies) {
-            if (isInRange(enemy, hero)) {
-                enemy.attach();
-                enemy.updateAll();
+                if (isInRange(enemy, hero)) {
+                    enemy.attach();
+                    enemy.updateAll();
 
-                // Dans update, on regarde le comportement et puis on affiche
-                enemy.update(d);
+                    // Dans update, on regarde le comportement et puis on
+                    // affiche
+                    enemy.update(d);
 
-                boolean collisionWithEnemyFound = CollisionUtils.checkCollision(enemy, hero);
-                if (collisionWithEnemyFound) {
+                if (!enemy.isDead() && !enemy.isDying()) {
+                    boolean collisionWithEnemyFound = CollisionUtils.checkCollision(enemy, hero);
+                    if (collisionWithEnemyFound) {
 
-                    // -_-'
-                    if (!hero.isBlinking) {
-                        removeHeart();
+                        // -_-'
+                        if (!hero.isBlinking) {
+                            removeHeart();
+                        }
+
+                        hero.collideWithEnemy();
                     }
-
-                    hero.collideWithEnemy();
                 }
             }
         }
@@ -439,11 +442,13 @@ public class Gaming extends GameState {
     protected void activate() {
 
         Hero hero = Globals.getInstance().getHero();
-        hero.newX = 209;
-        hero.newY = 2;
-        hero.x = 209;
-        hero.y = 2;
-        hero.setPosition(209, 2);
+//        hero.newX = 209;
+//        hero.newY = 2;
+//        hero.x = 209;
+//        hero.y = 2;
+//        hero.setPosition(209, 2);
+        hero.reset();
+        Globals.getInstance().getWorld().reset();
 
         endState = NAME;
         displayManager.show();

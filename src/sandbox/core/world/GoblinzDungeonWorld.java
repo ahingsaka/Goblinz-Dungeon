@@ -32,6 +32,12 @@ public class GoblinzDungeonWorld {
     private List<Enemy> enemies = new ArrayList<Enemy>();
     
     private int halfViewWidth = 0;
+    
+    public void reset() {
+        for (Enemy enemy : enemies) {
+            enemy.reset();
+        }
+    }
 
     public void setViewOrigin(float x, float y) {
         viewOriginX = x;

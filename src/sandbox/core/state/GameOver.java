@@ -76,6 +76,7 @@ public class GameOver extends GameState {
             if (textHasLoaded) {
                 Hero hero = Globals.getInstance().getHero();
                 hero.reset();
+                Globals.getInstance().getWorld().reset();
                 endState = Intro.NAME;
             }
             break;
