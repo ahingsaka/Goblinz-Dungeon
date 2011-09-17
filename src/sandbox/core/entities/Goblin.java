@@ -16,12 +16,14 @@ public class Goblin extends Enemy {
     public static String TYPE = "goblin";
 
     private static final float STEP = (float) 0.05;
-    
+
     private static final int BLINKING_TIME = 1000;
-    
+
     private int blinkingTime;
-    
+
     public float alpha;
+
+    private boolean isStriking;
 
     public static String JSON_IMAGE = "sprites/goblin.json";
     private Sprite sprite;
@@ -33,6 +35,7 @@ public class Goblin extends Enemy {
         this.y = y;
         newX = x - STEP;
 
+        isStriking = false;
         setMovingLeft(true);
         setFacingLeft(true);
 
@@ -68,7 +71,7 @@ public class Goblin extends Enemy {
 
         if (isDying()) {
             sprite.setCurrentAnimation(null);
-           blink(delta);
+            blink(delta);
 
         } else {
 
@@ -80,7 +83,7 @@ public class Goblin extends Enemy {
             if (currentAnimation != null) {
                 currentAnimation.update(delta);
                 String currentFrameId = currentAnimation.getCurrentFrameId();
-
+                
                 if (currentFrameId != null) {
                     sprite.setSprite(currentFrameId);
                 } else {
@@ -92,6 +95,7 @@ public class Goblin extends Enemy {
                         // sprite.setSprite("hero_right");
                     }
 
+                    isStriking = false;
                 }
             }
 
@@ -100,36 +104,40 @@ public class Goblin extends Enemy {
     }
 
     private void checkCollisions(float delta) {
-        boolean hasCollisionX = false;
-        // GoblinzDungeonWorld world = Globals.getInstance().getWorld();
 
-        if (newX != x) {
+        if (!isStriking) {
+            boolean hasCollisionX = false;
+            // GoblinzDungeonWorld world = Globals.getInstance().getWorld();
 
-            // Check world bounds
-            // if ((newX < 0) || (newX >= world.worldWidth)) {
-            // newX = x;
-            // hasCollisionX = true;
-            // }
+            if (newX != x) {
 
-            if (isMovingLeft()) {
-                hasCollisionX = collideLeft();
-                if (hasCollisionX) {
-                    setMovingLeft(false);
-                    setMovingRight(true);
+                // Check world bounds
+                // if ((newX < 0) || (newX >= world.worldWidth)) {
+                // newX = x;
+                // hasCollisionX = true;
+                // }
+
+                if (isMovingLeft()) {
+                    hasCollisionX = collideLeft();
+                    if (hasCollisionX) {
+                        setMovingLeft(false);
+                        setMovingRight(true);
+                    }
+
+                } else if (isMovingRight()) {
+                    hasCollisionX = collideRight();
+                    if (hasCollisionX) {
+                        setMovingRight(false);
+                        setMovingLeft(true);
+                    }
                 }
 
-            } else if (isMovingRight()) {
-                hasCollisionX = collideRight();
-                if (hasCollisionX) {
-                    setMovingRight(false);
-                    setMovingLeft(true);
+                if (!hasCollisionX) {
+                    x = newX;
+                } else {
+                    newX = x;
                 }
-            }
 
-            if (!hasCollisionX) {
-                x = newX;
-            } else {
-                newX = x;
             }
 
         }
@@ -162,18 +170,6 @@ public class Goblin extends Enemy {
             return false;
         }
 
-        // if (collide == Collision.NONE)
-        // return false;
-        // else if (collide == Collision.BLOCK)
-        // return true;
-        // else if (collide == Collision.HOLE) {
-        // //gameOver();
-        // return true;
-        // } else if (collide == Collision.END) {
-        // //isExitingLevel = true;
-        // return false;
-        // } else
-        // return false;
     }
 
     public boolean collideRight() {
@@ -205,26 +201,15 @@ public class Goblin extends Enemy {
             return false;
         }
 
-        // if (collide == Collision.NONE)
-        // return false;
-        // else if (collide == Collision.BLOCK)
-        // return true;
-        // else if (collide == Collision.HOLE) {
-        // //gameOver();
-        // return true;
-        // } else if (collide == Collision.END) {
-        // //isExitingLevel = true;
-        // return false;
-        // } else
-        // return false;
-
     }
 
     private void checkMovements() {
-        if (isMovingLeft()) {
-            moveLeft();
-        } else if (isMovingRight()) {
-            moveRight();
+        if (!isStriking) {
+            if (isMovingLeft()) {
+                moveLeft();
+            } else if (isMovingRight()) {
+                moveRight();
+            }
         }
     }
 
@@ -267,6 +252,8 @@ public class Goblin extends Enemy {
     @Override
     public void updateAll() {
 
+        // Update behaviour
+
     }
 
     @Override
@@ -302,15 +289,26 @@ public class Goblin extends Enemy {
             setMovingRight(false);
         }
     }
+
+    @Override
+    public void strikes() {
+        if (!isStriking) {
+            isStriking = true;
+            if (isFacingLeft()) {
+                sprite.setCurrentAnimation("goblin_strike_left");
+            } else if (isFacingRight()) {
+                sprite.setCurrentAnimation("goblin_strike_right");
+            }
+            
+            sprite.getCurrentAnimation().start();
+        }
+    }
     
     public void setAlpha(float alpha) {
         this.alpha = alpha;
         sprite.layer().setAlpha(alpha);
     }
-    
-    
-    
-    
+
     @Override
     public void reset() {
         super.reset();

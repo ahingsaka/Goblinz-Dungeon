@@ -90,6 +90,8 @@ public abstract class Enemy extends WorldObject implements Updatable {
     }
 
     public abstract void dies();
+    
+    public abstract void strikes();
 
     public void reset() {
         isDying = false;

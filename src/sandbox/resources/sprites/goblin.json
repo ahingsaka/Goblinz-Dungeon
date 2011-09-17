@@ -1,17 +1,24 @@
 {
-	"urls": ["images/goblin_v5.png"],
+	"urls": ["images/goblin_v6.png"],
 	"sprites": [
 		{"id": "goblin_stand", "url":0, "x": 0, "y":0, "w":56, "h": 58},
+		
+		{"id": "goblin_stand_right", "url":0, "x": 56, "y":0, "w":56, "h": 58},
 		
 		{"id": "goblin_walk_left0", "url": 0, "x": 0, "y": 58, "w": 56, "h": 58},
     	{"id": "goblin_walk_left1", "url": 0, "x": 56, "y": 58, "w": 56, "h": 58},
     	
     	{"id": "goblin_walk_right0", "url": 0, "x": 0, "y": 116, "w": 56, "h": 58},
-    	{"id": "goblin_walk_right1", "url": 0, "x": 56, "y": 116, "w": 56, "h": 58}
+    	{"id": "goblin_walk_right1", "url": 0, "x": 56, "y": 116, "w": 56, "h": 58},
+    	
+    	{"id": "goblin_strike_left", "url": 0, "x": 0, "y": 174, "w": 112, "h": 58},
+    	{"id": "goblin_strike_right", "url": 0, "x": 0, "y": 238, "w": 112, "h": 58}
     	
 	],
 	"animations": [
 		{"id": "goblin_walk_left", "looping": true, "frametime": 250, "sprite_ids": ["goblin_walk_left0", "goblin_walk_left1"]},
-		{"id": "goblin_walk_right", "looping": true, "frametime": 250, "sprite_ids": ["goblin_walk_right0", "goblin_walk_right1"]}
+		{"id": "goblin_walk_right", "looping": true, "frametime": 250, "sprite_ids": ["goblin_walk_right0", "goblin_walk_right1"]},
+		{"id": "goblin_strike_right", "looping": false, "frametime": 400, "sprite_ids": ["goblin_stand_right", "goblin_strike_right", "goblin_stand_right", "goblin_strike_right"]},
+		{"id": "goblin_strike_left", "looping": false, "frametime": 400, "sprite_ids": ["goblin_stand", "goblin_strike_left", "goblin_stand", "goblin_strike_left"]}
 	]
 }

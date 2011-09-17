@@ -104,13 +104,17 @@ public class Gaming extends GameState {
         Hero hero = Globals.getInstance().getHero();
 
         for (Enemy enemy : enemies) {
-                if (isInRange(enemy, hero)) {
-                    enemy.attach();
-                    enemy.updateAll();
+            if (isInRange(enemy, hero)) {
+                enemy.attach();
+                enemy.updateAll();
 
-                    // Dans update, on regarde le comportement et puis on
-                    // affiche
-                    enemy.update(d);
+                if (isInCloseRange(enemy, hero)) {
+                    enemy.strikes();
+                }
+
+                // Dans update, on regarde le comportement et puis on
+                // affiche
+                enemy.update(d);
 
                 if (!enemy.isDead() && !enemy.isDying()) {
                     boolean collisionWithEnemyFound = CollisionUtils.checkCollision(enemy, hero);
@@ -137,10 +141,26 @@ public class Gaming extends GameState {
 
         if (((heroX + halfViewWidth) >= enemyX) && ((enemyX >= (heroX - halfViewWidth)))) {
             isInRange = true;
-            // System.out.println("enemy in range");
         }
 
         return isInRange;
+    }
+
+    private boolean isInCloseRange(Enemy enemy, Hero hero) {
+        boolean isInRange = false;
+        float enemyX = enemy.getX();
+        float heroX = hero.x;
+
+        int width = 3;
+
+        if ((hero.isFacingLeft && enemy.isFacingRight()) || (hero.isFacingRight && enemy.isFacingLeft())) {
+            if (((heroX + width) >= enemyX) && ((enemyX >= (heroX - width)))) {
+                isInRange = true;
+            }
+        }
+
+        return isInRange;
+
     }
 
     private void makeScreenDisappear() {
@@ -442,11 +462,11 @@ public class Gaming extends GameState {
     protected void activate() {
 
         Hero hero = Globals.getInstance().getHero();
-//        hero.newX = 209;
-//        hero.newY = 2;
-//        hero.x = 209;
-//        hero.y = 2;
-//        hero.setPosition(209, 2);
+        // hero.newX = 209;
+        // hero.newY = 2;
+        // hero.x = 209;
+        // hero.y = 2;
+        // hero.setPosition(209, 2);
         hero.reset();
         Globals.getInstance().getWorld().reset();
 
