@@ -120,9 +120,17 @@ public class Gaming extends GameState {
                 // Dans update, on regarde le comportement et puis on
                 // affiche
                 enemy.update(d);
+                
 
                 if (!enemy.isDead() && !enemy.isDying()) {
-                    boolean collisionWithEnemyFound = CollisionUtils.checkCollision(enemy, hero);
+                    boolean collisionWithEnemyFound = false;
+                    
+                    if (enemy.isStrikingFull()) {
+                        collisionWithEnemyFound = CollisionUtils.checkCollision(enemy, hero, 2);
+                    } else {
+                        collisionWithEnemyFound = CollisionUtils.checkCollision(enemy, hero, 1);
+                    }
+                    
                     if (collisionWithEnemyFound) {
 
                         // -_-'

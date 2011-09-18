@@ -14,6 +14,16 @@ public abstract class Enemy extends WorldObject implements Updatable {
     private boolean isDead = false;
     
     private boolean isDying = false;
+    
+    private boolean isStrikingFull = false;
+
+    public boolean isStrikingFull() {
+        return isStrikingFull;
+    }
+
+    public void setStrikingFull(boolean isStrikingFull) {
+        this.isStrikingFull = isStrikingFull;
+    }
 
     private int width = 56;
 

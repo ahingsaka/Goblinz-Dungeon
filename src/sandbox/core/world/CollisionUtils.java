@@ -11,10 +11,9 @@ public class CollisionUtils {
      * @param enemy
      * @param hero
      */
-    public static boolean checkCollision(Enemy enemy, Hero hero) {
+    public static boolean checkCollision(Enemy enemy, Hero hero, int width) {
         boolean result = false;
 
-        int width = 1;
         if (((enemy.getX() + width) >= hero.x) && (enemy.getX() <= (hero.x + width))) {
             if ((enemy.getY() + width >= hero.y) && (enemy.getY() <= (hero.x + width))) {
                 result = true;

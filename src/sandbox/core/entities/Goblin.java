@@ -83,9 +83,18 @@ public class Goblin extends Enemy {
             if (currentAnimation != null) {
                 currentAnimation.update(delta);
                 String currentFrameId = currentAnimation.getCurrentFrameId();
-                
+
                 if (currentFrameId != null) {
                     sprite.setSprite(currentFrameId);
+
+                    // FIXME is there a way to handle correctly the strike ?
+                    if (isStriking && (currentAnimation.getFrameIndex() == 1)
+                            || (currentAnimation.getFrameIndex() == 2)) {
+                        setStrikingFull(true);
+                    } else if (isStriking) {
+                        setStrikingFull(false);
+                    }
+
                 } else {
                     sprite.setCurrentAnimation(null);
 
@@ -96,6 +105,7 @@ public class Goblin extends Enemy {
                     }
 
                     isStriking = false;
+                    setStrikingFull(false); 
                 }
             }
 
@@ -299,11 +309,11 @@ public class Goblin extends Enemy {
             } else if (isFacingRight()) {
                 sprite.setCurrentAnimation("goblin_strike_right");
             }
-            
+
             sprite.getCurrentAnimation().start();
         }
     }
-    
+
     public void setAlpha(float alpha) {
         this.alpha = alpha;
         sprite.layer().setAlpha(alpha);
