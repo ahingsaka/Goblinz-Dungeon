@@ -1,5 +1,6 @@
 package sandbox.core.world;
 
+import sandbox.core.Globals;
 import sandbox.core.entities.Enemy;
 import sandbox.core.entities.Goblin;
 import sandbox.core.entities.statik.Door;
@@ -21,7 +22,7 @@ import forplay.core.ResourceCallback;
 public class WorldLoader {
 
     public static void loadLevel(String level, final GoblinzDungeonWorld goblinzDungeonWorld,
-            final GroupLayer groupLayer, final ResourceCallback<GoblinzDungeonWorld> callback) {
+            final GroupLayer groupLayer, final Globals globals, final ResourceCallback<GoblinzDungeonWorld> callback) {
 
         ForPlay.assetManager().getText(level, new ResourceCallback<String>() {
 
@@ -36,7 +37,7 @@ public class WorldLoader {
                 Rock rock = new Rock();
                 Door door = new Door();
                 InvisibleRock invisibleRock = new InvisibleRock();
-                
+
                 Wall wall = new Wall();
 
                 AssetWatcher assetWatcher = new AssetWatcher(new AssetWatcher.Listener() {
@@ -92,7 +93,7 @@ public class WorldLoader {
                     }
 
                 }
-                
+
                 // Fill empty squares with walls
                 WorldObject[] world = goblinzDungeonWorld.getWorld();
                 for (int i = 0; i < world.length; i++) {
@@ -100,7 +101,7 @@ public class WorldLoader {
                         world[i] = wall;
                     }
                 }
-                
+
                 // Create the array of enemies
                 Array enemiesArray = document.getArray("Enemies");
                 for (int i = 0; i < enemiesArray.length(); i++) {

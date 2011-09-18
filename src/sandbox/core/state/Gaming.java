@@ -35,7 +35,7 @@ public class Gaming extends GameState {
 
         if (!hasLoaded) {
             WorldLoader.loadLevel("levels/level1.json", Globals.getInstance().getWorld(), Globals.getInstance()
-                    .getCharacterLayer(), new ResourceCallback<GoblinzDungeonWorld>() {
+                    .getCharacterLayer(), Globals.getInstance(), new ResourceCallback<GoblinzDungeonWorld>() {
 
                 @Override
                 public void error(Throwable err) {

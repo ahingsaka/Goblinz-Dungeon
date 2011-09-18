@@ -13,7 +13,7 @@ public class Globals {
     private GoblinzDungeonWorld world;
 
     private GroupLayer characterLayer;
-
+    
     private Globals() {
 
     }

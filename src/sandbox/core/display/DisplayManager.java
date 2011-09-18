@@ -49,7 +49,7 @@ public class DisplayManager {
     public GroupLayer getCharacterLayer() {
         return characterLayer;
     }
-
+    
     public GroupLayer getTextLayer() {
         return textLayer;
     }
