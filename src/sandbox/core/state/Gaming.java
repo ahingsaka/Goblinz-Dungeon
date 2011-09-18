@@ -109,7 +109,12 @@ public class Gaming extends GameState {
                 enemy.updateAll();
 
                 if (isInCloseRange(enemy, hero)) {
-                    enemy.strikes();
+                    
+                    // FIXME
+                    float random = ForPlay.random();
+                    if (random < 0.1) {
+                        enemy.strikes();
+                    }
                 }
 
                 // Dans update, on regarde le comportement et puis on
