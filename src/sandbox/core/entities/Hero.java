@@ -282,11 +282,11 @@ public class Hero extends WorldObject implements Updatable {
         sprite.setSprite(0);
         setAlpha(1);
 
-        newX = 209;
-        newY = 2;
-        x = 209;
-        y = 2;
-        setPosition(209, 2);
+        newX = 1;
+        newY = 6;
+        x = 1;
+        y = 6;
+        setPosition(1, 6);
         isFalling = false;
         setFallingLeft(false);
         setFallingRight(false);
